@@ -74,6 +74,12 @@ def move_0_end(arr):
         
             slow += 1
 
+def linear_search(arr, find):
+    for i in range(len(arr)):
+        if arr[i] == find:
+            return i
+    return 'Not Found'
+
 if __name__ == '__main__':
     arr = [1, 0, 5, 0, 65, 0, 0, 98, 76, 43]
     # print(f'The Largest element in the array is : {largest_element(arr)}')
@@ -86,5 +92,6 @@ if __name__ == '__main__':
     # print(f'The array with remove duplicates : {arr}')
     # rotate(arr, k = 3)
     # print(f"The Rotated array by k elements : {arr}")
-    move_0_end(arr)
-    print(f'The array where 0 are in end : {arr}')
+    # move_0_end(arr)
+    # print(f'The array where 0 are in end : {arr}')
+    print(f'5 is located at : {linear_search(arr, 4)}')
