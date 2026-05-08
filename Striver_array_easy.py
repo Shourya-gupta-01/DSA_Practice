@@ -66,10 +66,16 @@ def rotate(arr, k):
 
 # Move 0's to end
 def move_0_end(arr):
-    pass
+    slow = 0
+
+    for fast in range(len(arr)):
+        if arr[fast] != 0:
+            arr[fast], arr[slow] = arr[slow], arr[fast]
+        
+            slow += 1
 
 if __name__ == '__main__':
-    arr = [1, 2, 3, 4, 5, 6, 7]
+    arr = [1, 0, 5, 0, 65, 0, 0, 98, 76, 43]
     # print(f'The Largest element in the array is : {largest_element(arr)}')
     # print(f'The Second Largest element in the array is : {second_largest_element(arr)}')
     # print(f'The Second Smallest element in the array is : {second_smallest_element(arr)}')
@@ -78,5 +84,7 @@ if __name__ == '__main__':
     # print(f"The sorted array is : {arr}")
     # remove_duplicates(arr)
     # print(f'The array with remove duplicates : {arr}')
-    rotate(arr, k = 3)
-    print(f"The Rotated array by k elements : {arr}")
+    # rotate(arr, k = 3)
+    # print(f"The Rotated array by k elements : {arr}")
+    move_0_end(arr)
+    print(f'The array where 0 are in end : {arr}')
