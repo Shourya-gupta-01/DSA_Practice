@@ -120,9 +120,21 @@ def missing_num(arr):
 
     return summ - arr_sum
 
+# Maximum Consecutive Ones
+def max_ones(arr):
+    res = 0
+    temp = 0
+    for i in range(len(arr)):
+        if arr[i] == 1:
+            temp += 1
+        else:
+            temp = 0
+
+        res = max(res, temp)
+    return res
 
 if __name__ == '__main__':
-    arr = [1, 2, 3, 4, 5, 6, 7]
+    arr = [1, 1, 0, 1, 1, 1]
     arr1 = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
     arr2 = [2, 3, 4, 4, 5, 11, 12]
     # print(f'The Largest element in the array is : {largest_element(arr)}')
@@ -139,4 +151,5 @@ if __name__ == '__main__':
     # print(f'The array where 0 are in end : {arr}')
     # print(f'5 is located at : {linear_search(arr, 4)}')
     # print(f'The union of two arrays is : {union_of_two_sorted_arrays(arr1, arr2)}')
-    print(f'The Missing number in the array is : {missing_num(arr)}')
+    # print(f'The Missing number in the array is : {missing_num(arr)}')
+    print(f'The Maximum Number of ones in array : {max_ones(arr)}')
