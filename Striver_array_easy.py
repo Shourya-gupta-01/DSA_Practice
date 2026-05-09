@@ -141,6 +141,22 @@ def getSingleElement(arr):
 
     return xorr
 
+# Maximum Subarray with target sum
+def longest_subarray(arr, target):
+    res = 0
+    left = 0
+    temp = 0
+    for right in range(len(arr)):
+        temp += arr[right]
+        if temp > target:
+            while left <= right and temp > target:
+                temp -= arr[left]
+                left += 1
+        if temp == target:
+            res = max(res, right - left + 1)
+
+    return res
+
 if __name__ == '__main__':
     arr = [1, 1, 0]
     arr1 = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
@@ -161,4 +177,5 @@ if __name__ == '__main__':
     # print(f'The union of two arrays is : {union_of_two_sorted_arrays(arr1, arr2)}')
     # print(f'The Missing number in the array is : {missing_num(arr)}')
     # print(f'The Maximum Number of ones in array : {max_ones(arr)}')
-    print(f'The single element in the whole array is : {getSingleElement(arr)}')
+    # print(f'The single element in the whole array is : {getSingleElement(arr)}')
+    print(f'The Largest subarray with the sum target is : {longest_subarray(arr2, 5)}')
