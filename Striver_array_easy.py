@@ -133,8 +133,16 @@ def max_ones(arr):
         res = max(res, temp)
     return res
 
+# Element present only once in array
+def getSingleElement(arr):
+    xorr = 0
+    for i in arr:
+        xorr ^= i
+
+    return xorr
+
 if __name__ == '__main__':
-    arr = [1, 1, 0, 1, 1, 1]
+    arr = [1, 1, 0]
     arr1 = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
     arr2 = [2, 3, 4, 4, 5, 11, 12]
     # print(f'The Largest element in the array is : {largest_element(arr)}')
@@ -152,4 +160,5 @@ if __name__ == '__main__':
     # print(f'5 is located at : {linear_search(arr, 4)}')
     # print(f'The union of two arrays is : {union_of_two_sorted_arrays(arr1, arr2)}')
     # print(f'The Missing number in the array is : {missing_num(arr)}')
-    print(f'The Maximum Number of ones in array : {max_ones(arr)}')
+    # print(f'The Maximum Number of ones in array : {max_ones(arr)}')
+    print(f'The single element in the whole array is : {getSingleElement(arr)}')
