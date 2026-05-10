@@ -34,7 +34,25 @@ def two_sum_indices(arr, target):
             i += 1
     return [-1, -1]
 
+# Sort 0's, 1's, 2's
+def sortZeroOneTwo(arr):
+    cnt_0 = 0
+    cnt_1 = 0
+    cnt_2 = 0
+
+    for i in arr:
+        if i == 0:
+            cnt_0 += 1
+        elif i == 1:
+            cnt_1 += 1
+        else:
+            cnt_2 += 1
+
+    res = cnt_0 * [0] + cnt_1 * [1] + cnt_2 * [2]
+    return res
+
 if __name__ == "__main__":
-    arr = [2, 6, 11, 5, 8]
-    print(f'The target sum exist in arr : {two_sum_exists(arr, 11)}')
-    print(f'The indices of target sum exist in arr : {two_sum_indices(arr, 11)}')
+    arr = [2, 0, 2, 1, 1, 0]
+    # print(f'The target sum exist in arr : {two_sum_exists(arr, 11)}')
+    # print(f'The indices of target sum exist in arr : {two_sum_indices(arr, 11)}')
+    print(f'The sorted arr is : {sortZeroOneTwo(arr)}')
