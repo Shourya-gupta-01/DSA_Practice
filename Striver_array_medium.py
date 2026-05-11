@@ -51,8 +51,27 @@ def sortZeroOneTwo(arr):
     res = cnt_0 * [0] + cnt_1 * [1] + cnt_2 * [2]
     return res
 
+# Majority element
+def majorityElement(arr):
+    if not arr: return None
+    
+    cnt = 0
+    element = None
+    
+    for x in arr:
+        if cnt == 0:
+            element = x
+            cnt = 1
+        elif x == element:
+            cnt += 1
+        else:
+            cnt -= 1
+            
+    return element
+
 if __name__ == "__main__":
-    arr = [2, 0, 2, 1, 1, 0]
+    arr = [7, 0, 0, 1, 7, 7, 2, 7, 7]
     # print(f'The target sum exist in arr : {two_sum_exists(arr, 11)}')
     # print(f'The indices of target sum exist in arr : {two_sum_indices(arr, 11)}')
-    print(f'The sorted arr is : {sortZeroOneTwo(arr)}')
+    # print(f'The sorted arr is : {sortZeroOneTwo(arr)}')
+    print(f'The majority element in the array is: {majorityElement(arr)}')
