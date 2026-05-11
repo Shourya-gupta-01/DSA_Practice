@@ -72,18 +72,24 @@ def majorityElement(arr):
 # Kadane's Algorithim:
 def kadaneAlgo(arr):
     ans = float('-inf')
-    temp = 0\
-    
-    for i in arr:
-        temp += i
-        ans = max(ans, temp)
+    ind = [0, 0]
+    temp = 0
+    start = 0
+
+    for i in range(len(arr)):
+        temp += arr[i]
+        if ans < temp:
+            ans = temp
+            ind[1] = i
+            ind[0] = start
         if temp < 0:
             temp = 0
+            start = i + 1
         
-    return ans
+    return ans, ind
 
 if __name__ == "__main__":
-    arr = [2, 3, 5, -2, 7, -4]
+    arr = [0, -1, 2, 0, 1]
     # print(f'The target sum exist in arr : {two_sum_exists(arr, 11)}')
     # print(f'The indices of target sum exist in arr : {two_sum_indices(arr, 11)}')
     # print(f'The sorted arr is : {sortZeroOneTwo(arr)}')
