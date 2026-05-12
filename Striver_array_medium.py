@@ -118,12 +118,30 @@ def rearrangeEle(arr):
             neg_ind += 2
     return res
 
+# Next Permutation
+def nextPermutation(arr):
+    ind = -1
+    for i in range(len(arr) - 2, -1, -1):
+        if arr[i] < arr[i + 1]:
+            ind = i
+            break
+    if ind == -1:
+        arr.reverse()
+        return 
+    for i in range(len(arr) - 1, ind, -1):
+        if arr[ind] < arr[i]:
+            arr[ind], arr[i] = arr[i], arr[ind]
+            break
+    arr[ind + 1:] = reversed(arr[ind + 1:])
+
 if __name__ == "__main__":
-    arr = [3,1,-2,-5,2,-4]
+    arr = [1,3,2]
     # print(f'The target sum exist in arr : {two_sum_exists(arr, 11)}')
     # print(f'The indices of target sum exist in arr : {two_sum_indices(arr, 11)}')
     # print(f'The sorted arr is : {sortZeroOneTwo(arr)}')
     # print(f'The majority element in the array is: {majorityElement(arr)}')
     # print(f'The maximum sum subarray is : {kadaneAlgo(arr)}')
     # print(f'The profit you get : {maxProfit(arr)}')
-    print(f'The array with alternate sign element : {rearrangeEle(arr)}')
+    # print(f'The array with alternate sign element : {rearrangeEle(arr)}')
+    nextPermutation(arr)
+    print(f'The next permutation for the given input is {arr}')
