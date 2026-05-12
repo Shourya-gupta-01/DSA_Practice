@@ -104,11 +104,26 @@ def maxProfit(arr):
 
     return profit
 
+# Rearrange array element by sign
+def rearrangeEle(arr):
+    res = [0] * len(arr)
+    pos_ind = 0
+    neg_ind = 1
+    for i in arr:
+        if i > 0:
+            res[pos_ind] = i
+            pos_ind += 2
+        else:
+            res[neg_ind] = i
+            neg_ind += 2
+    return res
+
 if __name__ == "__main__":
-    arr = [7, 1, 5, 3, 6, 4]
+    arr = [3,1,-2,-5,2,-4]
     # print(f'The target sum exist in arr : {two_sum_exists(arr, 11)}')
     # print(f'The indices of target sum exist in arr : {two_sum_indices(arr, 11)}')
     # print(f'The sorted arr is : {sortZeroOneTwo(arr)}')
     # print(f'The majority element in the array is: {majorityElement(arr)}')
     # print(f'The maximum sum subarray is : {kadaneAlgo(arr)}')
-    print(f'The profit you get : {maxProfit(arr)}')
+    # print(f'The profit you get : {maxProfit(arr)}')
+    print(f'The array with alternate sign element : {rearrangeEle(arr)}')
