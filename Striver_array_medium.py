@@ -88,10 +88,27 @@ def kadaneAlgo(arr):
         
     return ans, ind
 
+# Stock buy and sell
+def maxProfit(arr):
+    gloabalMin = float('inf')
+    localMax = -1
+    profit = 0
+
+    for i in arr:
+        if i < gloabalMin:
+            gloabalMin = i
+            localMax = 0
+        if i > localMax:
+            localMax = i
+            profit = max(profit, localMax - gloabalMin)
+
+    return profit
+
 if __name__ == "__main__":
-    arr = [0, -1, 2, 0, 1]
+    arr = [7, 1, 5, 3, 6, 4]
     # print(f'The target sum exist in arr : {two_sum_exists(arr, 11)}')
     # print(f'The indices of target sum exist in arr : {two_sum_indices(arr, 11)}')
     # print(f'The sorted arr is : {sortZeroOneTwo(arr)}')
     # print(f'The majority element in the array is: {majorityElement(arr)}')
-    print(f'The maximum sum subarray is : {kadaneAlgo(arr)}')
+    # print(f'The maximum sum subarray is : {kadaneAlgo(arr)}')
+    print(f'The profit you get : {maxProfit(arr)}')
