@@ -135,16 +135,16 @@ def nextPermutation(arr):
     arr[ind + 1:] = reversed(arr[ind + 1:])
 
 # Leader's in an array [Left to right] [Space -> O(n)]
-# def leaders(arr):
-#     stk = []
-#     for i in arr:
-#         if stk and stk[-1] > i:
-#             stk.append(i)
-#         else:
-#             while stk and stk[-1] < i:
-#                 stk.pop()
-#             stk.append(i)
-#     return stk
+def leaders(arr):
+    stk = []
+    for i in arr:
+        if stk and stk[-1] > i:
+            stk.append(i)
+        else:
+            while stk and stk[-1] < i:
+                stk.pop()
+            stk.append(i)
+    return stk
 
 # [Right to Left] [Space -> O(1)]
 def leaders(arr):
@@ -163,8 +163,24 @@ def leaders(arr):
     
     return res[::-1]
 
+# Longest Consecutive Subsequence in an array
+def longestConsecutive(arr):
+    longest = 0
+    st = set(arr)
+
+    for it in st:
+        if it - 1 not in st:
+            cnt = 1
+            x = it
+
+            while x + 1 in st:
+                x = x + 1
+                cnt += 1
+            longest = max(longest, cnt)
+    return longest 
+
 if __name__ == "__main__":
-    arr = [10, 22, 12, 3, 0, 6]
+    arr = [100, 4, 200, 1, 3, 2]
     # print(f'The target sum exist in arr : {two_sum_exists(arr, 11)}')
     # print(f'The indices of target sum exist in arr : {two_sum_indices(arr, 11)}')
     # print(f'The sorted arr is : {sortZeroOneTwo(arr)}')
@@ -175,3 +191,4 @@ if __name__ == "__main__":
     # nextPermutation(arr)
     # print(f'The next permutation for the given input is {arr}')
     print(f'The Leaders of the array are : {leaders(arr)}')
+    print(f'The Longest Consecutive Subsequence in an array is : {longestConsecutive(arr)}')
