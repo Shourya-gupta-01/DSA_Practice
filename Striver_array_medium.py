@@ -134,8 +134,37 @@ def nextPermutation(arr):
             break
     arr[ind + 1:] = reversed(arr[ind + 1:])
 
+# Leader's in an array [Left to right] [Space -> O(n)]
+# def leaders(arr):
+#     stk = []
+#     for i in arr:
+#         if stk and stk[-1] > i:
+#             stk.append(i)
+#         else:
+#             while stk and stk[-1] < i:
+#                 stk.pop()
+#             stk.append(i)
+#     return stk
+
+# [Right to Left] [Space -> O(1)]
+def leaders(arr):
+    n = len(arr)
+    if n == 0:
+        return []
+    
+    res = []
+    max_from_right = arr[n-1]
+    res.append(max_from_right)
+    
+    for i in range(n-2, -1, -1):
+        if arr[i] >= max_from_right:
+            max_from_right = arr[i]
+            res.append(max_from_right)
+    
+    return res[::-1]
+
 if __name__ == "__main__":
-    arr = [1,3,2]
+    arr = [10, 22, 12, 3, 0, 6]
     # print(f'The target sum exist in arr : {two_sum_exists(arr, 11)}')
     # print(f'The indices of target sum exist in arr : {two_sum_indices(arr, 11)}')
     # print(f'The sorted arr is : {sortZeroOneTwo(arr)}')
@@ -143,5 +172,6 @@ if __name__ == "__main__":
     # print(f'The maximum sum subarray is : {kadaneAlgo(arr)}')
     # print(f'The profit you get : {maxProfit(arr)}')
     # print(f'The array with alternate sign element : {rearrangeEle(arr)}')
-    nextPermutation(arr)
-    print(f'The next permutation for the given input is {arr}')
+    # nextPermutation(arr)
+    # print(f'The next permutation for the given input is {arr}')
+    print(f'The Leaders of the array are : {leaders(arr)}')
