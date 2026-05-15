@@ -200,8 +200,20 @@ def setZeroes(matrix):
             for i in range(n):
                 matrix[i][j] = 0
 
+# Rotate matrix by 90
+def rotateMatrix90(matrix):
+    n = len(matrix)
+    m = len(matrix[0])
+    
+    for i in range(n):
+        for j in range(i, m):
+            matrix[i][j], matrix[j][i] = matrix[j][i], matrix[i][j]
+
+    for i in matrix:
+        i.reverse()
+
 if __name__ == "__main__":
-    arr = [[0,1,2,0],[3,4,5,2],[1,3,1,5]]
+    arr = [[0, 1, 1, 2], [2, 0, 3, 1], [4, 5, 0, 5], [5, 6, 7, 0]]
     # print(f'The target sum exist in arr : {two_sum_exists(arr, 11)}')
     # print(f'The indices of target sum exist in arr : {two_sum_indices(arr, 11)}')
     # print(f'The sorted arr is : {sortZeroOneTwo(arr)}')
@@ -213,5 +225,7 @@ if __name__ == "__main__":
     # print(f'The next permutation for the given input is {arr}')
     # print(f'The Leaders of the array are : {leaders(arr)}')
     # print(f'The Longest Consecutive Subsequence in an array is : {longestConsecutive(arr)}')
-    setZeroes(arr)
-    print(f'Set matrix zeroes : {arr}')
+    # setZeroes(arr)
+    # print(f'Set matrix zeroes : {arr}')
+    rotateMatrix90(arr)
+    print(f'The matrix is rotated by 90 degree : {arr}')
