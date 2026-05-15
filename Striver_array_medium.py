@@ -177,10 +177,31 @@ def longestConsecutive(arr):
                 x = x + 1
                 cnt += 1
             longest = max(longest, cnt)
-    return longest 
+    return longest
+
+# Set Matrix 0's
+def setZeroes(matrix):
+    n = len(matrix)
+    m = len(matrix[0])
+    dummy = [1] * m
+    zero = 1
+
+    for i in range(n):
+        for j in range(m):
+            if matrix[i][j] == 0:
+                zero = 0
+                dummy[j] = 0
+        if zero == 0:
+            matrix[i] = [0] * m
+        zero = 1
+
+    for j in range(m):
+        if dummy[j] == 0:
+            for i in range(n):
+                matrix[i][j] = 0
 
 if __name__ == "__main__":
-    arr = [100, 4, 200, 1, 3, 2]
+    arr = [[0,1,2,0],[3,4,5,2],[1,3,1,5]]
     # print(f'The target sum exist in arr : {two_sum_exists(arr, 11)}')
     # print(f'The indices of target sum exist in arr : {two_sum_indices(arr, 11)}')
     # print(f'The sorted arr is : {sortZeroOneTwo(arr)}')
@@ -190,5 +211,7 @@ if __name__ == "__main__":
     # print(f'The array with alternate sign element : {rearrangeEle(arr)}')
     # nextPermutation(arr)
     # print(f'The next permutation for the given input is {arr}')
-    print(f'The Leaders of the array are : {leaders(arr)}')
-    print(f'The Longest Consecutive Subsequence in an array is : {longestConsecutive(arr)}')
+    # print(f'The Leaders of the array are : {leaders(arr)}')
+    # print(f'The Longest Consecutive Subsequence in an array is : {longestConsecutive(arr)}')
+    setZeroes(arr)
+    print(f'Set matrix zeroes : {arr}')
