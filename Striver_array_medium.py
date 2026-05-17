@@ -212,8 +212,27 @@ def rotateMatrix90(matrix):
     for i in matrix:
         i.reverse()
 
+# Count Subarray with given Sum
+def subarraySum(arr, target):
+    d = {}
+    cumSum = 0
+    ans = 0
+
+    for i in arr:
+        if cumSum not in d:
+            d[cumSum] = 1
+        else:
+            d[cumSum] += 1
+
+        cumSum += i
+
+        if cumSum - target in d:
+            ans += d[cumSum - target]
+
+    return ans
+
 if __name__ == "__main__":
-    arr = [[0, 1, 1, 2], [2, 0, 3, 1], [4, 5, 0, 5], [5, 6, 7, 0]]
+    arr = [1,2,3]
     # print(f'The target sum exist in arr : {two_sum_exists(arr, 11)}')
     # print(f'The indices of target sum exist in arr : {two_sum_indices(arr, 11)}')
     # print(f'The sorted arr is : {sortZeroOneTwo(arr)}')
@@ -227,5 +246,6 @@ if __name__ == "__main__":
     # print(f'The Longest Consecutive Subsequence in an array is : {longestConsecutive(arr)}')
     # setZeroes(arr)
     # print(f'Set matrix zeroes : {arr}')
-    rotateMatrix90(arr)
-    print(f'The matrix is rotated by 90 degree : {arr}')
+    # rotateMatrix90(arr)
+    # print(f'The matrix is rotated by 90 degree : {arr}')
+    print(f'The total Number of subarray exit for given targe : {subarraySum(arr, 3)}')
