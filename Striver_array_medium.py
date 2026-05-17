@@ -231,8 +231,55 @@ def subarraySum(arr, target):
 
     return ans
 
+# Spiral Matrix traversal
+def spiralOrder(matrix):
+    m, n = len(matrix), len(matrix[0])
+    ans = []
+    i, j = 0, 0
+    up, right, down, left = 0, 1, 2, 3
+    direction = right
+
+    up_wall = 0
+    right_wall = n
+    down_wall = m
+    left_wall = -1
+
+    while len(ans) != m * n:
+        if direction == right:
+            while j < right_wall:
+                ans.append(matrix[i][j])
+                j += 1
+            i, j = i + 1, j - 1
+            right_wall -= 1
+            direction = down
+        
+        elif direction == down:
+            while i < down_wall:
+                ans.append(matrix[i][j])
+                i += 1
+            i, j = i - 1, j - 1
+            down_wall -= 1
+            direction = left
+            
+        elif direction == left:
+            while j > left_wall:
+                ans.append(matrix[i][j])
+                j -= 1
+            i, j = i - 1, j + 1
+            left_wall += 1
+            direction = up
+            
+        elif direction == up:
+            while i > up_wall:
+                ans.append(matrix[i][j])
+                i -= 1
+            i, j = i + 1, j + 1
+            up_wall += 1
+            direction = right
+    return ans
+
 if __name__ == "__main__":
-    arr = [1,2,3]
+    arr = [[1,2,3,4],[5,6,7,8],[9,10,11,12]]
     # print(f'The target sum exist in arr : {two_sum_exists(arr, 11)}')
     # print(f'The indices of target sum exist in arr : {two_sum_indices(arr, 11)}')
     # print(f'The sorted arr is : {sortZeroOneTwo(arr)}')
@@ -248,4 +295,5 @@ if __name__ == "__main__":
     # print(f'Set matrix zeroes : {arr}')
     # rotateMatrix90(arr)
     # print(f'The matrix is rotated by 90 degree : {arr}')
-    print(f'The total Number of subarray exit for given targe : {subarraySum(arr, 3)}')
+    # print(f'The total Number of subarray exit for given targe : {subarraySum(arr, 3)}')
+    print(f'Spiral order traversal of matrix : {spiralOrder(arr)}')
