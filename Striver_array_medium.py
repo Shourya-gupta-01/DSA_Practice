@@ -278,6 +278,31 @@ def spiralOrder(matrix):
             direction = right
     return ans
 
+# Pascal's Triangle
+def pascalTriangle(numRows):
+    dummy = [[1]]
+    res = []
+    flag = True
+    cnt = 1
+
+    if numRows == 1:
+        return dummy
+        
+    while flag:
+        res = [1]
+        for i in range(len(dummy[-1]) - 1):
+            res.append(dummy[-1][i] + dummy[-1][i + 1])
+
+        res.append(1)
+        dummy.append(res)
+        res = []
+        cnt += 1
+
+        if cnt == numRows:
+            flag = False
+
+    return dummy
+
 if __name__ == "__main__":
     arr = [[1,2,3,4],[5,6,7,8],[9,10,11,12]]
     # print(f'The target sum exist in arr : {two_sum_exists(arr, 11)}')
@@ -296,4 +321,5 @@ if __name__ == "__main__":
     # rotateMatrix90(arr)
     # print(f'The matrix is rotated by 90 degree : {arr}')
     # print(f'The total Number of subarray exit for given targe : {subarraySum(arr, 3)}')
-    print(f'Spiral order traversal of matrix : {spiralOrder(arr)}')
+    # print(f'Spiral order traversal of matrix : {spiralOrder(arr)}')
+    print(f'The Pascal Triangle {pascalTriangle(4)}')
