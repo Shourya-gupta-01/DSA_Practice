@@ -41,8 +41,31 @@ def majorityElement(nums):
             count2 -= 1
     return [n for n in (cand1, cand2) if nums.count(n) > len(nums) // 3]
 
+# 3Sum
+def threeSum(nums):
+    ans = []
+    nums.sort()
+    for k in range(len(nums)):
+        if k>0 and nums[k]==nums[k-1]:
+            continue
+        i=k+1
+        j=len(nums)-1
+        while i<j:
+            summ=nums[k]+nums[i]+nums[j]
+            if summ==0:
+                ans.append(sorted([nums[i], nums[j], nums[k]]))
+                i+=1
+                while nums[i]==nums[i-1] and i<j:
+                    i+=1
+            elif summ>0:
+                j-=1
+            else:
+                i+=1
+    return ans
+
 if __name__ == "__main__":
-    arr = [11, 33, 33, 11, 33, 11]
+    arr = [-1, 0, 1, 2, -1, -4]
     # print(f'The Pascal Triangle {pascalTriangle(4)}')
-    ans = majorityElement(arr)
-    print("The majority elements are:", ans)
+    # ans = majorityElement(arr)
+    # print("The majority elements are:", ans)
+    print(f'The target sum is of : {threeSum(arr)}')
