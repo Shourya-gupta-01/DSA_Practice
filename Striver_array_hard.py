@@ -94,9 +94,26 @@ def fourSum(arr, target):
                     right -= 1
     return ans
 
+# Largest Subarray with sum 0
+def zeroSubarray(arr):
+    d = {}
+    cum_sum = 0
+    ans = 0
+
+    for i in range(len(arr)):
+        if cum_sum not in d:
+            d[cum_sum] = i
+        cum_sum += arr[i]
+
+        if cum_sum in d:
+            ans = max(ans, i - d[cum_sum] + 1)
+
+    return ans
+
 if __name__ == "__main__":
-    arr = [1,0,-1,0,-2,2]
+    arr = [6, -2, 2, -8, 1, 7, 4, -10]
     # print(f'The Pascal Triangle {pascalTriangle(4)}')
     # ans = majorityElement(arr)
     # print("The majority elements are:", ans)
-    print(f'The target sum is of : {fourSum(arr, 0)}')
+    # print(f'The target sum is of : {fourSum(arr, 0)}')
+    print(f'Longest subarray with sum 0 : {zeroSubarray(arr)}')
