@@ -125,11 +125,24 @@ def countSubarraysXOR(arr, k):
             d[xr] += 1
     return res
 
+# Merge overlapping sub-intervals
+def mergeIntervals(intervals):
+    intervals.sort(key = lambda interval: interval[0])
+    merged = []
+    for interval in intervals:
+        if not merged or merged[-1][1] < interval[0]:
+            merged.append(interval)
+        else:
+            merged[-1][1] = interval[1]
+
+    return merged
+
 if __name__ == "__main__":
-    arr = [4, 2, 2, 6, 4]
+    arr = [[4,7],[1,4]]
     # print(f'The Pascal Triangle {pascalTriangle(4)}')
     # ans = majorityElement(arr)
     # print("The majority elements are:", ans)
     # print(f'The target sum is of : {fourSum(arr, 0)}')
     # print(f'Longest subarray with sum 0 : {zeroSubarray(arr)}')
-    print(f'The Number of Subarray with XOR k : {countSubarraysXOR(arr, 6)}')
+    # print(f'The Number of Subarray with XOR k : {countSubarraysXOR(arr, 6)}')
+    print(f'The merged intervals are : {mergeIntervals(arr)}')
