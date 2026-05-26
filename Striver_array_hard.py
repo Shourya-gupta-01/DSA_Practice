@@ -110,10 +110,26 @@ def zeroSubarray(arr):
 
     return ans
 
+# Count the number of subarray with given XOR k
+def countSubarraysXOR(arr, k):
+    d = {0:1}
+    xr = 0
+    res = 0
+    for i in arr:
+        xr ^= i
+        if xr ^ k in d:
+            res += d[xr ^ k]
+        if xr not in d:
+            d[xr] = 1
+        else:
+            d[xr] += 1
+    return res
+
 if __name__ == "__main__":
-    arr = [6, -2, 2, -8, 1, 7, 4, -10]
+    arr = [4, 2, 2, 6, 4]
     # print(f'The Pascal Triangle {pascalTriangle(4)}')
     # ans = majorityElement(arr)
     # print("The majority elements are:", ans)
     # print(f'The target sum is of : {fourSum(arr, 0)}')
-    print(f'Longest subarray with sum 0 : {zeroSubarray(arr)}')
+    # print(f'Longest subarray with sum 0 : {zeroSubarray(arr)}')
+    print(f'The Number of Subarray with XOR k : {countSubarraysXOR(arr, 6)}')
