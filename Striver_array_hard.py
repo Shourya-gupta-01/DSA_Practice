@@ -137,12 +137,31 @@ def mergeIntervals(intervals):
 
     return merged
 
+# Merge two sorted arrays without extra space
+def mergeArrays(nums1, m, nums2, n):
+    i = m - 1
+    j = n - 1
+    k = m + n - 1
+
+    while j >= 0:
+        if i >= 0 and nums1[i] > nums2[j]:
+            nums1[k] = nums1[i]
+            i -= 1
+        else:
+            nums1[k] = nums2[j]
+            j -= 1
+
+        k -= 1
+
 if __name__ == "__main__":
-    arr = [[4,7],[1,4]]
+    arr1 = [1,2,3,0,0,0]
+    arr2 = [2,5,6]
     # print(f'The Pascal Triangle {pascalTriangle(4)}')
     # ans = majorityElement(arr)
     # print("The majority elements are:", ans)
     # print(f'The target sum is of : {fourSum(arr, 0)}')
     # print(f'Longest subarray with sum 0 : {zeroSubarray(arr)}')
     # print(f'The Number of Subarray with XOR k : {countSubarraysXOR(arr, 6)}')
-    print(f'The merged intervals are : {mergeIntervals(arr)}')
+    # print(f'The merged intervals are : {mergeIntervals(arr)}')
+    mergeArrays(arr1 ,3 ,arr2, 3)
+    print(f'The merged arrays are : {arr1}')
