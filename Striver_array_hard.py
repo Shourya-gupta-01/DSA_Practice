@@ -153,9 +153,58 @@ def mergeArrays(nums1, m, nums2, n):
 
         k -= 1
 
+# Find the repeating and missing number (Better Approach)
+# def findMissingRepeatingNumbers(arr):
+#     n = len(arr)
+#     ans = []
+#     d = {}
+#     summ = 0
+#     for i in arr:
+#         if i in d:
+#             d[i] += 1
+#             if d[i] == 2:
+#                 ans.append(i)        
+#         else:
+#             d[i] = 1
+#         summ += i
+
+#     missing = (n * ((n + 1) / 2)) - (summ - ans[0])
+#     ans.append(missing)
+
+#     return ans
+
+# Find the repeating and missing number (Optimal Approach 1) Space Complexity --> O(1)
+def findMissingRepeatingNumbers(nums):
+    n = len(nums)
+    SN = (n * (n + 1)) // 2
+
+    S2N = (n * (n + 1) * (2 * n + 1)) // 6
+
+    S = 0
+    S2 = 0
+    for num in nums:
+        S += num
+        S2 += num * num
+
+    val1 = S - SN
+
+    val2 = S2 - S2N
+
+    # Calculate X + Y using X + Y = (X^2 - Y^2) / (X - Y)
+    val2 = val2 // val1
+
+    x = (val1 + val2) // 2
+    y = x - val1
+
+    # Return the results as [repeating, missing]
+    return [int(x), int(y)]
+
+# # Find the repeating and missing number (Optimal Approach 2) Space Complexity --> O(1)
+# def findMissingRepeatingNumbers(nums):
+#     pass
+
 if __name__ == "__main__":
-    arr1 = [1,2,3,0,0,0]
-    arr2 = [2,5,6]
+    arr = [1, 2, 3, 6, 7, 5, 7]
     # print(f'The Pascal Triangle {pascalTriangle(4)}')
     # ans = majorityElement(arr)
     # print("The majority elements are:", ans)
@@ -163,5 +212,6 @@ if __name__ == "__main__":
     # print(f'Longest subarray with sum 0 : {zeroSubarray(arr)}')
     # print(f'The Number of Subarray with XOR k : {countSubarraysXOR(arr, 6)}')
     # print(f'The merged intervals are : {mergeIntervals(arr)}')
-    mergeArrays(arr1 ,3 ,arr2, 3)
-    print(f'The merged arrays are : {arr1}')
+    # mergeArrays(arr1 ,3 ,arr2, 3)
+    # print(f'The merged arrays are : {arr1}')
+    print(f'The repeating and missing numbers are : {findMissingRepeatingNumbers(arr)}')
