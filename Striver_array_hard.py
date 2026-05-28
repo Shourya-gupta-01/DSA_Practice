@@ -154,24 +154,24 @@ def mergeArrays(nums1, m, nums2, n):
         k -= 1
 
 # Find the repeating and missing number (Better Approach)
-# def findMissingRepeatingNumbers(arr):
-#     n = len(arr)
-#     ans = []
-#     d = {}
-#     summ = 0
-#     for i in arr:
-#         if i in d:
-#             d[i] += 1
-#             if d[i] == 2:
-#                 ans.append(i)        
-#         else:
-#             d[i] = 1
-#         summ += i
+def findMissingRepeatingNumbers(arr):
+    n = len(arr)
+    ans = []
+    d = {}
+    summ = 0
+    for i in arr:
+        if i in d:
+            d[i] += 1
+            if d[i] == 2:
+                ans.append(i)        
+        else:
+            d[i] = 1
+        summ += i
 
-#     missing = (n * ((n + 1) / 2)) - (summ - ans[0])
-#     ans.append(missing)
+    missing = (n * ((n + 1) / 2)) - (summ - ans[0])
+    ans.append(missing)
 
-#     return ans
+    return ans
 
 # Find the repeating and missing number (Optimal Approach 1) Space Complexity --> O(1)
 def findMissingRepeatingNumbers(nums):
@@ -199,12 +199,49 @@ def findMissingRepeatingNumbers(nums):
     # Return the results as [repeating, missing]
     return [int(x), int(y)]
 
-# # Find the repeating and missing number (Optimal Approach 2) Space Complexity --> O(1)
-# def findMissingRepeatingNumbers(nums):
-#     pass
+# Find the repeating and missing number (Optimal Approach 2) Space Complexity --> O(1)
+def findMissingRepeatingNumbers(nums):
+    pass
+
+# Count Inversions in an array
+def numberOfInversions(arr):
+    ans = 0
+    def merge_sort(arr, low, high):
+        if low == high:
+            return
+        mid = low + (high - low) // 2
+        merge_sort(arr, low, mid)
+        merge_sort(arr, mid + 1, high)
+        merge(arr, low, mid, high)
+
+    def merge(arr, low, mid, high):
+        nonlocal ans
+        temp = []
+        left = low
+        right = mid + 1
+        while left <= mid and right <= high:
+            if arr[left] <= arr[right]:
+                temp.append(arr[left])
+                left += 1
+            else:
+                temp.append(arr[right])
+                ans += mid - left + 1
+                right += 1
+
+        if left <= mid:
+            temp.extend(arr[left:mid + 1])
+
+        if right <= high:
+            temp.extend(arr[right:high + 1])
+
+        for i in range(len(temp)):
+            arr[low + i] = temp[i]
+
+    merge_sort(arr, 0, len(arr) - 1)
+    return ans
 
 if __name__ == "__main__":
-    arr = [1, 2, 3, 6, 7, 5, 7]
+    arr = [5, 3, 2, 4, 1]
     # print(f'The Pascal Triangle {pascalTriangle(4)}')
     # ans = majorityElement(arr)
     # print("The majority elements are:", ans)
@@ -214,4 +251,5 @@ if __name__ == "__main__":
     # print(f'The merged intervals are : {mergeIntervals(arr)}')
     # mergeArrays(arr1 ,3 ,arr2, 3)
     # print(f'The merged arrays are : {arr1}')
-    print(f'The repeating and missing numbers are : {findMissingRepeatingNumbers(arr)}')
+    # print(f'The repeating and missing numbers are : {findMissingRepeatingNumbers(arr)}')
+    print(f'The Number of Inversion in the given array are : {numberOfInversions(arr)}')
