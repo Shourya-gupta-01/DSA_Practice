@@ -240,8 +240,51 @@ def numberOfInversions(arr):
     merge_sort(arr, 0, len(arr) - 1)
     return ans
 
+# Reverse Pairs
+def reversePairs(arr):
+    ans = 0
+    def merge_sort(arr, low, high):
+        if low == high:
+            return
+        mid = low + (high - low) // 2
+        merge_sort(arr, low, mid)
+        merge_sort(arr, mid + 1, high)
+        merge(arr, low, mid, high)
+
+    def merge(arr, low, mid, high):
+        nonlocal ans
+        temp = []
+        left = low
+        right = mid + 1
+
+        for i in range(low, mid + 1):
+            while right <= high and arr[i] > 2 * arr[right]:
+                right += 1
+            ans += (right - (mid + 1))
+
+        right = mid + 1
+        while left <= mid and right <= high:
+            if arr[left] <= arr[right]:
+                temp.append(arr[left])
+                left += 1
+            else:
+                temp.append(arr[right])
+                right += 1
+
+        if left <= mid:
+            temp.extend(arr[left:mid + 1])
+
+        if right <= high:
+            temp.extend(arr[right:high + 1])
+
+        for i in range(len(temp)):
+            arr[low + i] = temp[i]
+
+    merge_sort(arr, 0, len(arr) - 1)
+    return ans
+
 if __name__ == "__main__":
-    arr = [5, 3, 2, 4, 1]
+    arr = [2,4,3,5,1]
     # print(f'The Pascal Triangle {pascalTriangle(4)}')
     # ans = majorityElement(arr)
     # print("The majority elements are:", ans)
@@ -252,4 +295,5 @@ if __name__ == "__main__":
     # mergeArrays(arr1 ,3 ,arr2, 3)
     # print(f'The merged arrays are : {arr1}')
     # print(f'The repeating and missing numbers are : {findMissingRepeatingNumbers(arr)}')
-    print(f'The Number of Inversion in the given array are : {numberOfInversions(arr)}')
+    # print(f'The Number of Inversion in the given array are : {numberOfInversions(arr)}')
+    print(f'The Number of Reverse Pairs in the given array are : {reversePairs(arr)}')
