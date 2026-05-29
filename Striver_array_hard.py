@@ -283,8 +283,21 @@ def reversePairs(arr):
     merge_sort(arr, 0, len(arr) - 1)
     return ans
 
+# Maximum Product Subarray
+def maxProductSubarray(arr):
+    curMax, curMin = 1, 1
+    res = max(arr)
+    for n in arr:
+        if n == 0:
+            curMax, curMin = 1, 1
+            continue
+        curMax = max(curMax * n, curMin * n, n)
+        curMin = min(curMax * n, curMin * n, n)
+        res = max(res, curMax)
+    return res
+
 if __name__ == "__main__":
-    arr = [2,4,3,5,1]
+    arr = [2,4,0,5,1, 6]
     # print(f'The Pascal Triangle {pascalTriangle(4)}')
     # ans = majorityElement(arr)
     # print("The majority elements are:", ans)
@@ -296,4 +309,5 @@ if __name__ == "__main__":
     # print(f'The merged arrays are : {arr1}')
     # print(f'The repeating and missing numbers are : {findMissingRepeatingNumbers(arr)}')
     # print(f'The Number of Inversion in the given array are : {numberOfInversions(arr)}')
-    print(f'The Number of Reverse Pairs in the given array are : {reversePairs(arr)}')
+    # print(f'The Number of Reverse Pairs in the given array are : {reversePairs(arr)}')
+    print(f'The Maximum Product Subarray in an array is : {maxProductSubarray(arr)}')
