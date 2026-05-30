@@ -54,6 +54,24 @@ def searchInsertX(arr, x):
             left = mid + 1
     return ans
 
+# Floor and Ceil in Sorted array
+def floor_ceil(arr, x):
+    floor = -1
+    ceil = -1
+    left = 0
+    right = len(arr) - 1
+    while left <= right:
+        mid = left + (right - left) // 2
+        if arr[mid] == x:
+            return [arr[mid]] * 2
+        if arr[mid] > x:
+            ceil = mid
+            right = mid - 1
+        else:
+            floor = mid
+            left = mid + 1
+    return [arr[floor], arr[ceil]] 
+
 if __name__ == '__main__':
     arr = [3,5,8,9,15,19]
-    print(f'The x element must be inserted at index: {searchInsertX(arr, 2)}')
+    print(f'The floor and ceil value of x must be inserted at index: {floor_ceil(arr, 7)}')
