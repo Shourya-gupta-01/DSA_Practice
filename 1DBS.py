@@ -26,6 +26,20 @@ def lowerBound(arr, x):
             left = mid + 1
     return ans
 
+# Upper Bound
+def upperBound(arr, x):
+    ans = len(arr)
+    left = 0
+    right = len(arr) - 1
+    while left <= right:
+        mid = left + (right - left) // 2
+        if arr[mid] > x:
+            ans = mid
+            right = mid - 1
+        else:
+            left = mid + 1
+    return ans
+
 if __name__ == '__main__':
-    arr = [3,5,8,15,19]
-    print(f'The x element in at index: {lowerBound(arr, 9)}')
+    arr = [3,5,8,9,15,19]
+    print(f'The x element in at index: {upperBound(arr, 9)}')
