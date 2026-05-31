@@ -112,6 +112,26 @@ def countX(arr: list[int], target: int) -> int:
         return 0
     return (cnt[1] - cnt[0]) + 1
 
+# Search in rotated sorted array - 1
+def searchRotated1(arr: list[int], target: int) -> int:
+    left = 0
+    right = len(arr) - 1
+    while left <= right:
+        mid = left + (right - left) // 2
+        if arr[mid] == target:
+            return mid
+        elif arr[mid] >= arr[left]:
+            if target > arr[mid] or target < arr[left]:
+                left = mid + 1
+            else:
+                right = mid - 1
+        else:
+            if target < arr[mid] or target > arr[right]:
+                right = mid - 1
+            else:
+                left = mid + 1
+    return 'Not Found'
+
 if __name__ == '__main__':
-    arr = [3,5,8,8,8,8,8,8,8,8,9,15,19]
-    print(f'The count of x in given array: {countX(arr, 8)}')
+    arr = [4,5,6,7,1,2]
+    print(f'The element x found at index: {searchRotated1(arr, 2)}')
