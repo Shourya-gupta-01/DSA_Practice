@@ -72,6 +72,39 @@ def floor_ceil(arr, x):
             left = mid + 1
     return [arr[floor], arr[ceil]] 
 
+# First and last occurrence
+def searchRange(nums, target):
+    ans = [-1, -1]
+    left = 0
+    right = len(nums) - 1
+
+    while left <= right:
+        mid = left + (right - left) // 2
+
+        if nums[mid] == target:
+            ans[0] = mid
+            right = mid - 1
+        elif nums[mid] > target:
+            right = mid - 1
+        else:
+            left = mid + 1
+    
+    left = 0
+    right = len(nums) - 1
+
+    while left <= right:
+        mid = left + (right - left) // 2
+
+        if nums[mid] == target:
+            ans[1] = mid
+            left = mid + 1
+        elif nums[mid] > target:
+            right = mid - 1
+        else:
+            left = mid + 1
+    
+    return ans
+
 if __name__ == '__main__':
     arr = [3,5,8,9,15,19]
-    print(f'The floor and ceil value of x must be inserted at index: {floor_ceil(arr, 7)}')
+    print(f'The first and last occurrence of x is at index: {searchRange(arr, 8)}')
