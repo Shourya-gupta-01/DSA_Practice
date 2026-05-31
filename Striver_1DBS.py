@@ -73,7 +73,7 @@ def floor_ceil(arr, x):
     return [arr[floor], arr[ceil]] 
 
 # First and last occurrence
-def searchRange(nums, target):
+def searchRange(nums: list[int], target: int) -> list[int]:
     ans = [-1, -1]
     left = 0
     right = len(nums) - 1
@@ -105,6 +105,13 @@ def searchRange(nums, target):
     
     return ans
 
+# Count occurrences in the sorted array
+def countX(arr: list[int], target: int) -> int:
+    cnt = searchRange(arr, target)
+    if cnt[0] == -1:
+        return 0
+    return (cnt[1] - cnt[0]) + 1
+
 if __name__ == '__main__':
-    arr = [3,5,8,9,15,19]
-    print(f'The first and last occurrence of x is at index: {searchRange(arr, 8)}')
+    arr = [3,5,8,8,8,8,8,8,8,8,9,15,19]
+    print(f'The count of x in given array: {countX(arr, 8)}')
