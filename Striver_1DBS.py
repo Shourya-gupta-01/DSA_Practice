@@ -158,17 +158,29 @@ def searchRotated2(arr: list[int], target: int) -> int:
 
 # Minimum in rotated sorted array
 def minimum(nums: list[int]) -> int:
-    i = 0
-    j = len(nums) - 1
-    while i < j:
-        mid = i + ((j - i) // 2)
-        if nums[mid] > nums[j]:
-            i = mid + 1
+    left = 0
+    right = len(nums) - 1
+    while left < right:
+        mid = left + ((right - left) // 2)
+        if nums[mid] > nums[right]:
+            left = mid + 1
         else:
-            j = mid
+            right = mid
 
-    return nums[i]
+    return nums[left]
+
+# How many times array been rotated
+def countRotate(arr):
+    left = 0
+    right = len(arr) - 1
+    while left <= right:
+        mid = left + (right - left) // 2
+        if arr[mid] > arr[right]:
+            left = mid + 1
+        else:
+            right = mid - 1
+    return left
 
 if __name__ == '__main__':
-    arr = [4,5,6,7,0,1,2,3]
-    print(f'The element x found at index: {minimum(arr)}')
+    arr = [3, 4, 5, 1, 2]
+    print(f'The element x found at index: {countRotate(arr)}')
