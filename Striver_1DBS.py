@@ -155,7 +155,20 @@ def searchRotated2(arr: list[int], target: int) -> int:
             else:
                 left = mid + 1
     return False
-    
+
+# Minimum in rotated sorted array
+def minimum(nums: list[int]) -> int:
+    i = 0
+    j = len(nums) - 1
+    while i < j:
+        mid = i + ((j - i) // 2)
+        if nums[mid] > nums[j]:
+            i = mid + 1
+        else:
+            j = mid
+
+    return nums[i]
+
 if __name__ == '__main__':
-    arr = [4,5,6,7,1]
-    print(f'The element x found at index: {searchRotated2(arr, 2)}')
+    arr = [4,5,6,7,0,1,2,3]
+    print(f'The element x found at index: {minimum(arr)}')
