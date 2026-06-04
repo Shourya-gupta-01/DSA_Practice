@@ -200,6 +200,25 @@ def singleNonDuplicate(nums: list[int]) -> int:
         else:
             right = mid - 1
 
+# Peak element
+def peak(nums: list[int]) -> int:
+    if len(nums) == 1:
+        return 0
+    if nums[0] > nums[1]:
+        return 0
+    if nums[-1] > nums[-2]:
+        return len(nums) - 1
+    left = 1
+    right = len(nums) - 2
+    while left <= right:
+        mid = left + (right - left) // 2
+        if (nums[mid] > nums[mid - 1]) and (nums[mid] > nums[mid + 1]):
+            return mid
+        if (mid % 2 == 0 and nums[mid] < nums[mid + 1]) or (mid % 2 == 1 and nums[mid] > nums[mid - 1]):
+            left = mid + 1
+        else:
+            right = mid - 1
+
 if __name__ == '__main__':
-    arr = [1,2,2,3,3,4,4,8,8]
-    print(f'The single occured element is: {singleNonDuplicate(arr)}')
+    arr = [1,2,3,1]
+    print(f'The index of peak element is: {peak(arr)}')
