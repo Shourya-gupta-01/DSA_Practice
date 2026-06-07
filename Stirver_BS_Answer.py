@@ -29,6 +29,26 @@ def nroot(x: int, y: int) -> int:
             right = mid - 1
     return mid
 
+# Koko eating bananas
+def minEatingSpeed(piles: list[int], h: int) -> int:
+    def helper(piles: list[int], k: int) -> int:
+        time = 0
+        for i in piles:
+            time += (i // k) + 1
+        return time
+
+    ans = float('inf')
+    left = 0
+    right = max(piles)
+    while left <= right:
+        mid = left + (right - left) // 2
+        if helper(piles, mid) <= h:
+            ans = min(ans, mid)
+            right = mid - 1
+        else:
+            left = mid + 1
+    return ans
+
 if __name__ == '__main__':
-    x = 27
-    print(f'The nth root of {x} is {nroot(3, 125)}')
+    arr = [3,6,7,11]
+    print(f'The minimum hours koko need to eat all bananas: {minEatingSpeed(arr, 8)}')
