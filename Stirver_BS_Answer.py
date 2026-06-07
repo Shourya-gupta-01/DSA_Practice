@@ -49,6 +49,35 @@ def minEatingSpeed(piles: list[int], h: int) -> int:
             left = mid + 1
     return ans
 
+# Minimum days to make m bouquets
+def minDays(bloomDay, m, k):
+    def ispossible(bloomDay, m, k, dtb):
+        cnt = 0
+        b = 0
+        for i in bloomDay:
+            if i <= dtb:
+                cnt += 1
+                if cnt == k:
+                    b += 1
+                    cnt = 0
+                if m == b:
+                    return True
+            else:
+                cnt = 0
+        return b >= m
+    
+    if m * k > len(bloomDay):
+        return -1
+    left = 0
+    right = max(bloomDay) - 1
+    while left <= right:
+        mid = left + (right - left) // 2
+        if ispossible(bloomDay, m, k, mid):
+            right = mid -1
+        else:
+            left = mid + 1
+    return left
+
 if __name__ == '__main__':
-    arr = [3,6,7,11]
-    print(f'The minimum hours koko need to eat all bananas: {minEatingSpeed(arr, 8)}')
+    arr = [1,10,3,10,2]
+    print(f'The minimum day to create a bouquet is {minDays(arr, 3, 2)}')
