@@ -14,6 +14,21 @@ def squreRoot(x: int) -> int:
             right = mid - 1
     return ans
 
+# Nth root of a number
+def nroot(x: int, y: int) -> int:
+    left = 1
+    right = y
+
+    while left <= right:
+        mid = left + (right - left) // 2
+        if mid ** x == y:
+            return mid
+        elif mid ** x < y:
+            left = mid + 1
+        else:
+            right = mid - 1
+    return mid
+
 if __name__ == '__main__':
-    x = 28
-    print(f'The square root of {x} is {squreRoot(x)}')
+    x = 27
+    print(f'The nth root of {x} is {nroot(3, 125)}')
