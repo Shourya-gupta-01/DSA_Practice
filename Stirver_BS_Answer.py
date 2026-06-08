@@ -98,6 +98,30 @@ def smallestDivisor(nums, threshold):
             right = mid - 1
     return left
 
+# Capacity to Ship Packages within D Days
+def shipWithinDays(weights, days):
+    def compute(max_weight):
+        days = 1
+        summ = 0
+        for i in weights:
+            if summ + i > max_weight:
+                days += 1
+                summ = 0
+            summ += i
+        return days
+
+    left = max(weights)
+    right = sum(weights)
+        
+    while left <= right:
+        mid = left + (right - left) // 2
+        if compute(mid) > days:
+            left = mid + 1
+        else:
+            right = mid - 1
+    return left
+
+
 if __name__ == '__main__':
-    arr = [1,2,5,9]
-    print(f'The Smallest divisor is {smallestDivisor(arr, 6)}')
+    arr = [3,2,2,4,1,4]
+    print(f'The minimum number of days to ship {shipWithinDays(arr, 3)}')
