@@ -78,6 +78,26 @@ def minDays(bloomDay, m, k):
             left = mid + 1
     return left
 
+# Find the smallest divisor given a threshold
+def smallestDivisor(nums, threshold):
+    def compute(nums, divisor):
+        summ = 0
+        for i in nums:
+            # Important formula to calculate ceil value
+            summ += -(-i//divisor)
+        return summ
+                
+    left = 1
+    right = max(nums)
+
+    while left <= right:
+        mid = left + (right - left) // 2
+        if compute(nums, mid) > threshold:
+            left = mid + 1
+        else:
+            right = mid - 1
+    return left
+
 if __name__ == '__main__':
-    arr = [1,10,3,10,2]
-    print(f'The minimum day to create a bouquet is {minDays(arr, 3, 2)}')
+    arr = [1,2,5,9]
+    print(f'The Smallest divisor is {smallestDivisor(arr, 6)}')
