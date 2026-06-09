@@ -135,7 +135,31 @@ def missingK(arr, k):
             right = mid - 1
     return left + k
 
+# Aggressive Cows
+def aggressiveCows(stalls, k):
+    def ispossible(mid):
+        cnt = 1
+        lastPos = stalls[0]
+        for i in stalls:
+            if i - lastPos >= mid:
+                cnt += 1
+                lastPos = i
+            if cnt == k:
+                return True
+        return False
+            
+    stalls.sort()
+    left = 1
+    right = stalls[-1] - stalls[0]
+        
+    while left <= right:
+        mid = left + (right - left) // 2
+        if ispossible(mid):
+            left = mid + 1
+        else:
+            right = mid - 1
+    return right
 
 if __name__ == '__main__':
-    arr = [4,7,9,10]
-    print(f'The k missing number is {missingK(arr, 4)}')
+    arr = [2, 12, 11, 3, 26, 7]
+    print(f'The maximum distance cow can be placed {aggressiveCows(arr, 5)}')
