@@ -121,7 +121,21 @@ def shipWithinDays(weights, days):
             right = mid - 1
     return left
 
+# Kth missing positive numbers
+def missingK(arr, k):
+    left = 0
+    right = len(arr) - 1
+
+    while left <= right:
+        mid = left + (right - left) // 2
+        missing = arr[mid] - (mid + 1)
+        if missing < k:
+            left = mid + 1
+        else:
+            right = mid - 1
+    return left + k
+
 
 if __name__ == '__main__':
-    arr = [3,2,2,4,1,4]
-    print(f'The minimum number of days to ship {shipWithinDays(arr, 3)}')
+    arr = [4,7,9,10]
+    print(f'The k missing number is {missingK(arr, 4)}')
