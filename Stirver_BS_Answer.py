@@ -160,6 +160,33 @@ def aggressiveCows(stalls, k):
             right = mid - 1
     return right
 
+# Allocate Minimum number of pages:
+def findPages(arr, k):
+    def cntStudent(threshold):
+        students = 1
+        pagesStudent = 0
+        for i in arr:
+            if pagesStudent + i <= threshold:
+                pagesStudent += i
+            else:
+                students += 1
+                pagesStudent = i
+        return students
+    
+    if k > len(arr):
+        return -1
+
+    low = max(arr)
+    high = sum(arr)
+    while low <= high:
+        mid = (low + high) // 2
+        students = cntStudent(mid)
+        if students > k:
+            low = mid + 1  
+        else:
+            high = mid - 1
+    return low
+
 if __name__ == '__main__':
-    arr = [2, 12, 11, 3, 26, 7]
-    print(f'The maximum distance cow can be placed {aggressiveCows(arr, 5)}')
+    arr = [12, 34, 67, 90]
+    print(f'The maximum numbere of pages are {findPages(arr, 4)}')
