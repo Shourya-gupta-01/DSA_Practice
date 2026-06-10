@@ -187,6 +187,29 @@ def findPages(arr, k):
             high = mid - 1
     return low
 
+# Split array largest sum
+def splitArray(nums, k):
+    def calculate(threshold):
+        partitions = 1
+        currSum = 0
+        for i in nums:
+            if currSum + i > threshold:
+                currSum = i
+                partitions += 1
+            else:
+                currSum += i
+        return partitions
+    
+    left = max(nums)
+    right = sum(nums)
+    while left <= right:
+        mid = left + (right - left) // 2
+        if calculate(mid) > k:
+            left = mid + 1
+        else:
+            right -= 1
+    return left
+
 if __name__ == '__main__':
-    arr = [12, 34, 67, 90]
-    print(f'The maximum numbere of pages are {findPages(arr, 4)}')
+    arr = [7,2,5,10,8]
+    print(f'The largest sum with k partitions {splitArray(arr, 2)}')
