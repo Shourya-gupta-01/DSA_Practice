@@ -210,6 +210,29 @@ def splitArray(nums, k):
             right -= 1
     return left
 
+# Painters Partition
+def paintersPartition(arr, k):
+    def possible(threshold):
+        currSum = 0
+        cnt = 1
+        for i in arr:
+            if currSum + i > threshold:
+                currSum = i
+                cnt += 1
+            else:
+                currSum += i
+        return cnt
+
+    left = max(arr)
+    right = sum(arr)
+    while left <= right:
+        mid =  left + (right - left) // 2
+        if possible(mid) > k:
+            left = mid + 1
+        else:
+            right = mid - 1
+    return left
+
 if __name__ == '__main__':
-    arr = [7,2,5,10,8]
-    print(f'The largest sum with k partitions {splitArray(arr, 2)}')
+    arr = [5, 10, 30, 20, 15]
+    print(f'The answer is: {paintersPartition(arr, 3)}')
