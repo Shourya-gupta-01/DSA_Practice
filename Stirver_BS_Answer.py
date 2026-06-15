@@ -233,6 +233,29 @@ def paintersPartition(arr, k):
             right = mid - 1
     return left
 
+# Minimize Max Distance to Gas Station
+def minMaxDist(stations, k):
+    def possible(threshold):
+        cnt = 0
+        for i in range(1, len(stations)):
+            distance = stations[i] - stations[i - 1]
+            cnt += int((distance / threshold) - 1e-9)
+        return cnt
+                
+    left = 0
+    right = 0
+        
+    for i in range(len(stations) - 1):
+        right = max(right, stations[i + 1] - stations[i])
+        
+    while right - left > 1e-6:
+        mid = left + (right - left) / 2.0
+        if possible(mid) > k:
+            left = mid
+        else:
+            right = mid
+    return right
+
 if __name__ == '__main__':
-    arr = [5, 10, 30, 20, 15]
-    print(f'The answer is: {paintersPartition(arr, 3)}')
+    arr = [1, 2, 3, 4, 5]
+    print(f'The answer is: {minMaxDist(arr, 2)}')
