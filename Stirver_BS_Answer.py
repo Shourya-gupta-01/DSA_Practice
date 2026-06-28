@@ -285,7 +285,37 @@ def median2SortedArray(arr1, arr2):
             else:
                 low = cut1 + 1
 
+def kthElementFromSortedArray(a, b, k):
+    m = len(a)
+    n = len(b)
+
+    if m > n:
+        return kthElementFromSortedArray(b, a, k)
+        
+    left = k
+
+    low = max(0, k - n)
+    high = min(k, m)
+    while low <= high:
+        mid1 = (low + high) // 2
+        mid2 = left - mid1
+
+        l1 = a[mid1 - 1] if mid1 > 0 else float('-inf')
+        l2 = b[mid2 - 1] if mid2 > 0 else float('-inf')
+        r1 = a[mid1] if mid1 < m else float('inf')
+        r2 = b[mid2] if mid2 < n else float('inf')
+
+            # Check if we have found the answer
+        if l1 <= r2 and l2 <= r1:
+            return max(l1, l2)
+        elif l1 > r2:
+            high = mid1 - 1
+        else:
+            low = mid1 + 1
+        
+    return -1
+
 if __name__ == '__main__':
     arr1 = [1, 2]
-    arr2 = [3, 4]
-    print(f'The median of two sorted array is: {median2SortedArray(arr1, arr2)}')
+    arr2 = [3, 4, 5, 8, 10]
+    print(f'The kth element of two sorted array is: {kthElementFromSortedArray(arr1, arr2, 6)}')
