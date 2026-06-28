@@ -256,6 +256,36 @@ def minMaxDist(stations, k):
             right = mid
     return right
 
+# Median of two sorted arrays
+def median2SortedArray(arr1, arr2):
+    n1 = len(arr1)
+    n2 = len(arr2)
+
+    low = 0
+    high = n1
+
+    while (low <= high):
+        cut1 = (low + high) // 2
+        cut2 = (n1 + n2 + 1) // 2 - cut1
+
+        left1 = arr1[cut1 - 1] if cut1 != 0 else float('-inf')
+        left2 = arr2[cut2 - 1] if cut2 != 0 else float('-inf')
+
+        right1 = arr1[cut1] if cut1 != n1 else float('inf')
+        right2 = arr2[cut2] if cut2 != n2 else float('inf')
+
+        if left1 <= right2 and left2 <= right1:
+            if (n1 + n2) % 2 == 0:
+                return (max(left1, left2) + min(right1, right2)) / 2.0
+            else:
+                return max(left1, left2)
+        else:
+            if left1 > right2:
+                high = cut1 - 1
+            else:
+                low = cut1 + 1
+
 if __name__ == '__main__':
-    arr = [1, 2, 3, 4, 5]
-    print(f'The answer is: {minMaxDist(arr, 2)}')
+    arr1 = [1, 2]
+    arr2 = [3, 4]
+    print(f'The median of two sorted array is: {median2SortedArray(arr1, arr2)}')
