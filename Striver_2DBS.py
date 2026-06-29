@@ -89,11 +89,48 @@ def findPeakGrid(matrix):
 
     return [-1, -1]
 
+def medianMatrix(matrix):
+
+    def helper(matrix, x, n, m):
+        cnt = 0
+        for i in range(n):
+            low = 0
+            high = m - 1
+
+            while low <= high:
+                mid = low + (high - low) // 2
+                if matrix[i][mid] <= x:
+                    low = mid + 1
+                else:
+                    high = mid - 1
+            cnt += low
+
+        return cnt
+        
+    n = len(matrix)
+    m = len(matrix[0])
+    req = (n * m) / 2
+
+    low = float('inf')
+    high = float('-inf')
+
+    for i in range(n):
+        low = min(low, matrix[i][0])
+        high = max(high, matrix[i][m - 1])
+
+    while low <= high:
+        mid = low + (high - low) // 2
+        smallcnt = helper(matrix, mid, n, m)
+        if smallcnt <= req:
+            low = mid + 1
+        else:
+            high = mid - 1
+    return low
 
 if __name__ == "__main__":
-    mat = [[1, 4, 7, 11, 15],
-           [2, 5, 8, 12, 19],
-           [3, 6, 9, 16, 22],
-           [10, 13, 14, 17, 24],
-           [18, 21, 23, 26, 30]]
-    print(f'The peak element in matrix: {findPeakGrid(mat)}')
+    mat = [
+        [1, 3, 8],
+        [2, 3, 4],
+        [1, 2, 5],
+        ]
+    print(f'The median of the matrix: {medianMatrix(mat)}')
