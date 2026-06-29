@@ -56,6 +56,7 @@ def search2D2(matrix, target):
             return False
     return False
 
+# Find Peak Element in a 2D matrix
 def findPeakGrid(matrix):
 
     def findMax(matrix, col):
@@ -89,6 +90,7 @@ def findPeakGrid(matrix):
 
     return [-1, -1]
 
+# Find median of the 2D matrix
 def medianMatrix(matrix):
 
     def helper(matrix, x, n, m):
