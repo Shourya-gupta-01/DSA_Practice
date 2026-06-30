@@ -13,6 +13,10 @@ def removeOuterParenthesis(s):
             start = i + 1
     return ans
 
+# Reverse word in the string (NO O(1) space solution possible)
+def reverseWords(s):
+    return ' '.join(reversed(s.split()))
+
 if __name__ == '__main__':
-    s = '(()())(())(()(()))'
-    print(f'string s after removing outer parenthesis: {removeOuterParenthesis(s)}')
+    s = '  hello world  '
+    print(f'after reversing the string s: {reverseWords(s)}')
