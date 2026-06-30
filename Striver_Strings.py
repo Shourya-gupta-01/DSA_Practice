@@ -17,6 +17,13 @@ def removeOuterParenthesis(s):
 def reverseWords(s):
     return ' '.join(reversed(s.split()))
 
+# Largest Odd number in a string
+def largestOddNumber(num: str) -> str:
+    for i in range(len(num) - 1, -1, -1):
+        if num[i] in "13579":
+            return num[:i + 1]
+    return ""
+
 if __name__ == '__main__':
-    s = '  hello world  '
-    print(f'after reversing the string s: {reverseWords(s)}')
+    s = '24'
+    print(f'ans is: {largestOddNumber(s)}')
