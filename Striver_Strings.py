@@ -24,6 +24,17 @@ def largestOddNumber(num: str) -> str:
             return num[:i + 1]
     return ""
 
+# Longest Common Prefix
+def longestCommonPrefix(strs):
+    res = ""
+    for i in range(len(strs[0])):
+        for s in strs:
+            if len(s) == i or s[i] != strs[0][i]:
+                return res            
+        res += strs[0][i]
+    return res
+
+
 if __name__ == '__main__':
-    s = '24'
-    print(f'ans is: {largestOddNumber(s)}')
+    s = ["flower","flow","flight"]
+    print(f'Common Prefix: {longestCommonPrefix(s)}')
