@@ -34,7 +34,11 @@ def longestCommonPrefix(strs):
         res += strs[0][i]
     return res
 
+# Isomorphic string
+def isIsomorphic(s, t):
+    return len(set(zip(s, t))) == len(set(s)) == len(set(t))
 
 if __name__ == '__main__':
-    s = ["flower","flow","flight"]
-    print(f'Common Prefix: {longestCommonPrefix(s)}')
+    s = 'add'
+    t = 'egh'
+    print(f'Isomorphic: {isIsomorphic(s, t)}')
