@@ -38,7 +38,11 @@ def longestCommonPrefix(strs):
 def isIsomorphic(s, t):
     return len(set(zip(s, t))) == len(set(s)) == len(set(t))
 
+# Rotate string
+def rotateString(s, goal):
+    return len(s) == len(goal) and goal in (s + s)
+
 if __name__ == '__main__':
-    s = 'add'
-    t = 'egh'
-    print(f'Isomorphic: {isIsomorphic(s, t)}')
+    s = 'abcde'
+    t = 'dad'
+    print(f'rotate string: {rotateString(s, t)}')
