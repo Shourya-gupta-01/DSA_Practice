@@ -42,6 +42,7 @@ def isIsomorphic(s, t):
 def rotateString(s, goal):
     return len(s) == len(goal) and goal in (s + s)
 
+# Check Anagram
 def isAnagram(s: str, t: str) -> bool:
     if len(s) != len(t):
         return False
@@ -59,7 +60,20 @@ def isAnagram(s: str, t: str) -> bool:
             dt[t[i]] = 1
     return ds == dt
 
+# Sort Characters by Frequency
+def frequencySort(s):
+    d = {}
+    for i in s:
+        if i in d:
+            d[i] += 1
+        else:
+            d[i] = 1
+    ans = ''
+    for i, j in sorted(d.items(), key = lambda item: item[1], reverse = True):
+        ans += i * j
+
+    return ans
+
 if __name__ == '__main__':
-    s = 'abcde'
-    t = 'daace'
-    print(f'Anagram: {isAnagram(s, t)}')
+    s = 'shouryaa'
+    print(f'Sorted string: {frequencySort(s)}')
