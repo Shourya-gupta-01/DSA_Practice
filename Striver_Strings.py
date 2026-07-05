@@ -97,6 +97,33 @@ def romanToInt(s: str) -> int:
             ans += d[s[i]] - 2 * d[s[i - 1]] 
     return ans
 
+# String to Integer (atoi)
+def myAtoi(s: str) -> int:
+    INT_MAX = 2**31 - 1
+    INT_MIN = -2**31
+    s = s.strip(" ")
+    if not s:
+        return 0
+    if s[0].isalpha() or s[0] == '.':
+        return 0
+    ans = "0"
+    neg = (s[0] == '-')
+    for i in range(len(s)):
+        if s[i].isdigit():
+            ans += s[i]
+        elif i > 0 and not s[i].isdigit():
+            num = int(ans) * -1 if neg else int(ans)
+            if num >= INT_MIN and num <= INT_MAX:
+                return num
+            else:
+                return INT_MIN if num < INT_MIN else INT_MAX
+
+    num = int(ans) * -1 if neg else int(ans)
+    if num >= INT_MIN and num <= INT_MAX:
+        return num
+    else:
+        return INT_MIN if num < INT_MIN else INT_MAX
+
 if __name__ == '__main__':
-    s = 'MCMXCIV'
-    print(f'Roman to Integer {romanToInt(s)}')
+    s = '--4-2'
+    print(f'Sring to Integer {myAtoi(s)}')
