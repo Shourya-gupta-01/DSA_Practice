@@ -74,6 +74,18 @@ def frequencySort(s):
 
     return ans
 
+# Maximum Nesting Depth of Parenthesis
+def maxDepth(s: str) -> int:
+    stk = []
+    res = 0
+    for i in s:
+        if i == '(':
+            stk.append('(')
+            res = max(res, len(stk))
+        if i == ")":
+            stk.pop()
+    return res
+
 if __name__ == '__main__':
-    s = 'shouryaa'
-    print(f'Sorted string: {frequencySort(s)}')
+    s = '(1+(2*3)+((8)/4))+1'
+    print(f'Max Depth: {maxDepth(s)}')
