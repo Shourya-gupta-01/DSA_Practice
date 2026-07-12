@@ -123,7 +123,28 @@ def myAtoi(s: str) -> int:
         return num
     else:
         return INT_MIN if num < INT_MIN else INT_MAX
+    
+# Count Number of substrings
+def count_sustrings(s, k):
+    def atMostKDistincts(s, k):
+        left = 0 
+        res = 0
+        freq = {}
+
+        for right in range(len(s)):
+            freq[s[right]] = freq.get(s[right], 0) + 1
+
+            while len(freq) > k:
+                freq[s[left]] -= 1
+                if freq[s[left]] == 0:
+                    del freq[s[left]]
+                left += 1
+
+            res += (right - left + 1)
+        return res
+
+    return atMostKDistincts(s, k) - atMostKDistincts(s, k - 1)
 
 if __name__ == '__main__':
-    s = '--4-2'
-    print(f'Sring to Integer {myAtoi(s)}')
+    s = 'abcbaa'
+    print(f'Substring with k distinct count: {count_sustrings(s, 3)}')
