@@ -167,6 +167,44 @@ def longestPalindrome(s):
             r+=1
     return res
 
+# Sum of Beauty of all Substrings
+def beautySum(s):
+    a = [ord(ch) - 97 for ch in s]
+    n = len(a)
+    res = 0
+
+    for i in range(n):
+        cnt = [0] * 26
+        freq = [0] * (n + 1)
+
+        minf = 0
+        maxf = 0
+
+        for j in range(i, n):
+            idx = a[j]
+
+            old = cnt[idx]
+
+            if old:
+                freq[old] -= 1
+            
+            new = old + 1
+
+            cnt[idx] = new
+            freq[new] += 1
+
+            if new > maxf:
+                maxf = new
+            if minf == 0 or new < minf:
+                minf = new
+            elif old == minf and freq[old] == 0:
+                while minf <= maxf and freq[minf] == 0:
+                    minf += 1
+                
+            res += maxf - minf
+
+    return res
+
 if __name__ == '__main__':
-    s = 'babad'
-    print(f'Longest Palindromic substring: {longestPalindrome(s)}')
+    s = 'aabcbaa'
+    print(f'Sum of beauty of all substrings: {beautySum(s)}')
