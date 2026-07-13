@@ -205,6 +205,23 @@ def beautySum(s):
 
     return res
 
+# Reverse every word in a string
+def reverseWords(sentence):
+    sentence += ' '
+    stk = []
+    res = ''
+    for i in sentence:
+        if i == ' ':
+            if not stk:
+                pass
+            else:
+                res += ''.join(stk[::-1]) + ' '
+                stk = []
+        else:
+            stk.append(i)
+    
+    return res[:: -1].strip()
+
 if __name__ == '__main__':
-    s = 'aabcbaa'
-    print(f'Sum of beauty of all substrings: {beautySum(s)}')
+    s = 'the sky is 4 blue'
+    print(f'reverse words in a string: {reverseWords(s)}')
