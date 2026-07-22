@@ -33,5 +33,18 @@ def powerSet(s):
     helper(s, 0, current, result)
     return result
 
+# Count all subsequence with sum k
+def countSubsequenceSum(arr, k):
+    def helper(ind, summ, arr):
+        if summ == 0:
+            return 1
+        if ind == len(arr):
+            return 0
+
+        return helper(ind + 1, summ - arr[ind], arr) + helper(ind + 1, summ, arr)
+
+    return helper(0, k, arr)
+
+
 if __name__ == '__main__':
-    print(powerSet('abc'))
+    print(countSubsequenceSum([4, 2, 10, 5, 1, 3] , k = 5))
