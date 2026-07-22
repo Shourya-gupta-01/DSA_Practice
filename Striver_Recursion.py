@@ -58,5 +58,26 @@ def checkSubsequenceSum(arr, k):
         return helper(arr, ind + 1, k) or helper(arr, ind + 1, k - arr[ind])
     return helper(arr, 0, k)
 
+# Combination Sum
+def combinationSums(arr, target):
+    res = []
+    ds = []
+    def helper(arr, target, ind, ds, res):
+        if ind == len(arr):
+            if target == 0:
+                res.append(ds[:])
+            return
+
+        if arr[ind] <= target:
+            ds.append(arr[ind])
+            helper(arr, target - arr[ind], ind, ds, res)
+
+            ds.pop()
+        helper(arr, target, ind + 1, ds, res)
+
+    helper(arr, target, 0, ds, res)
+
+    return res
+
 if __name__ == '__main__':
-    print(checkSubsequenceSum([4, 3, 9, 2] , k = 10))
+    print(combinationSums([2,3,6,7], target = 7))
