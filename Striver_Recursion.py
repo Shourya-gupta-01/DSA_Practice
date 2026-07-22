@@ -45,6 +45,18 @@ def countSubsequenceSum(arr, k):
 
     return helper(0, k, arr)
 
+# Check Subsequence with sum k
+def checkSubsequenceSum(arr, k):
+    def helper(arr, ind, k):
+        if k == 0:
+            return True
+        if k < 0:
+            return False
+        if ind == len(arr):
+            return k == 0
+
+        return helper(arr, ind + 1, k) or helper(arr, ind + 1, k - arr[ind])
+    return helper(arr, 0, k)
 
 if __name__ == '__main__':
-    print(countSubsequenceSum([4, 2, 10, 5, 1, 3] , k = 5))
+    print(checkSubsequenceSum([4, 3, 9, 2] , k = 10))
