@@ -117,5 +117,24 @@ def subsets1(arr):
 
     return result
 
+# Subsets 2
+def subsets2(arr):
+    curr = []
+    result = []
+    def helper(arr, index, curr, result):
+        result.append(curr[:])
+        for i in range(index, len(arr)):
+            if i > index and arr[i] == arr[i - 1]:
+                continue
+
+            curr.append(arr[i])
+            helper(arr, i + 1, curr, result)
+            curr.pop()
+
+    helper(arr, 0, curr, result)
+
+    return result
+
+
 if __name__ == '__main__':
-    print(subsets1([5, 2, 1]))
+    print(subsets2([1, 2, 2]))
