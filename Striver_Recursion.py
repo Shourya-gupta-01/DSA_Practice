@@ -79,5 +79,29 @@ def combinationSums(arr, target):
 
     return res
 
+# Combination Sum 2 (No duplicates)
+def combinationSums2(arr, target):
+    result = []
+    curr = []
+    arr.sort()
+    def helper(arr, target, index, curr, result):
+        if target == 0:
+            result.append(curr[:])
+            return 
+        for i in range(index, len(arr)):
+            if i > index and arr[i] == arr[i - 1]:
+                continue
+            if arr[i] > target:
+                break
+
+            curr.append(arr[i])
+            helper(arr, target - arr[i], i + 1, curr, result)
+            curr.pop()
+
+    helper(arr, target, 0, curr, result)
+
+    return result
+
+
 if __name__ == '__main__':
-    print(combinationSums([2,3,6,7], target = 7))
+    print(combinationSums2([10,1,2,7,6,1,5], target = 8))
