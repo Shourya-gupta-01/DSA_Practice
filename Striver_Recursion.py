@@ -102,6 +102,20 @@ def combinationSums2(arr, target):
 
     return result
 
+# Subsets 1
+def subsets1(arr):
+    result = []
+    def helper(arr, index, summ, result):
+        if index == len(arr):
+            result.append(summ)
+            return
+
+        helper(arr, index + 1, summ, result)
+        helper(arr, index + 1, summ + arr[index], result)
+
+    helper(arr, 0, 0, result)
+
+    return result
 
 if __name__ == '__main__':
-    print(combinationSums2([10,1,2,7,6,1,5], target = 8))
+    print(subsets1([5, 2, 1]))
