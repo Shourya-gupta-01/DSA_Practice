@@ -135,6 +135,29 @@ def subsets2(arr):
 
     return result
 
+# Combination 3
+def combinationSums3(k, n):
+    # k -> target value
+    # n -> limit of numbers
+
+    arr = [i for i in range(1, 10)]
+    result = []
+    curr = []
+
+    def helper(arr, k, n, ind, curr, result):
+        if n == 0:
+            if k == 0:
+                result.append(curr[:])
+            return 
+        for i in range(ind, len(arr)):
+            if arr[i] > k:
+                break
+            curr.append(arr[i])
+            helper(arr, k - arr[i], n - 1, i + 1, curr, result)
+            curr.pop()
+
+    helper(arr, k, n, 0, curr, result)
+    return result
 
 if __name__ == '__main__':
-    print(subsets2([1, 2, 2]))
+    print(combinationSums3(7, 3))
