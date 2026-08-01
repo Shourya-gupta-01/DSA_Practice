@@ -159,5 +159,27 @@ def combinationSums3(k, n):
     helper(arr, k, n, 0, curr, result)
     return result
 
+# Letter Combination of a phone number
+def letterCombinations(digits):
+    result = []
+    curr = []
+    d = {'2': 'abc', '3': 'def', '4': 'ghi', '5': 'jkl', '6': 'mno', '7': 'pqrs', '8': 'tuv', '9': 'wxyz'}
+
+    def helper(index):
+        if index == len(digits):
+            result.append(''.join(curr))
+            return
+
+        current_digit = digits[index]
+        possible_letters = d[current_digit]
+
+        for i in possible_letters:
+            curr.append(i)
+            helper(index + 1)
+            curr.pop()
+
+    helper(0)
+    return result
+
 if __name__ == '__main__':
-    print(combinationSums3(7, 3))
+    print(letterCombinations('23'))
