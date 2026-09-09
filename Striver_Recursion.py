@@ -213,6 +213,7 @@ def exist(board, word):
                 return True
     return False
 
+# N-Queens
 def solveQueens(n):
     def solve(col, board, n, leftRow, upperDiagonal, lowerDiagonal, ans):
         if col == n:
@@ -238,5 +239,35 @@ def solveQueens(n):
     solve(0, board, n, leftRow, upperDiagonal, lowerDiagonal, ans)
     return ans
 
+# Rat in a Maze
+def ratInMaze(maze):
+    ans = []
+    n = len(maze)
+
+    def solve(row, col, maze, directions, n, ans):
+        if row >= 0 and col >= 0 and row <= n - 1 and col <= n - 1:
+            if maze[row][col] == 1:
+            
+                if [row, col] == [n - 1] * 2:
+                    ans.append(directions)
+                    return
+
+                maze[row][col] = 0
+                solve(row + 1, col, maze, directions + 'D', n, ans)
+                solve(row, col - 1, maze, directions + 'L', n, ans)
+                solve(row, col + 1, maze, directions + 'R', n, ans)
+                solve(row - 1, col, maze, directions + 'U', n, ans)
+                maze[row][col] = 1
+
+            else:
+                return
+
+        else:
+            return
+
+    solve(0, 0, maze, "", n, ans)
+    return ans
+
 if __name__ == '__main__':
-    print(solveQueens(4))
+    maze = [[1, 0, 0, 0], [1, 1, 0, 1], [1, 1, 0, 0], [0, 1, 1, 1]]
+    print(ratInMaze(maze))
