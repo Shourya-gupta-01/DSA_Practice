@@ -300,10 +300,23 @@ def solveSudoku(board):
 
     return True
 
+# Word Break
+def wordBreak(s, dictionary):
+    def solve(startIdx):
+        if startIdx == len(s):
+            return True
+
+        for word in dictionary:
+            endIdx = startIdx + len(word)
+
+            if endIdx <= len(s) and s[startIdx: endIdx] == word:
+                if solve(endIdx):
+                    return True
+
+        return False
+    return solve(0)
 
 if __name__ == '__main__':
-    board = [["5","3",".",".","7",".",".",".","."],["6",".",".","1","9","5",".",".","."],[".","9","8",".",".",".",".","6","."],["8",".",".",".","6",".",".",".","3"],["4",".",".","8",".","3",".",".","1"],["7",".",".",".","2",".",".",".","6"],[".","6",".",".",".",".","2","8","."],[".",".",".","4","1","9",".",".","5"],[".",".",".",".","8",".",".","7","9"]]
-    print(solveSudoku(board))
-    
-    for i in board:
-        print(i)
+    s = "ilikemangoes"
+    dictionary = ["i", "like", "man", "india", "gfg"]
+    print(wordBreak(s, dictionary))
