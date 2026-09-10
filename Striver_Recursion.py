@@ -268,6 +268,42 @@ def ratInMaze(maze):
     solve(0, 0, maze, "", n, ans)
     return ans
 
+# Sudoku Solver
+def solveSudoku(board):
+    def isValid(board, row, col, c):
+        boxRowStart = 3 * (row // 3)
+        boxColStart = 3 * (col // 3)
+        for i in range(9):
+            if board[i][col] == c:
+                return False
+
+            if board[row][i] == c:
+                return False
+
+            if board[boxRowStart + i // 3][boxColStart + i % 3] == c:
+                return False
+
+        return True
+
+    for i in range(9):
+        for j in range(9):
+            if board[i][j] == '.':
+                for c in map(str, range(1, 10)):
+                    if isValid(board, i, j, c):
+                        board[i][j] = c
+
+                        if solveSudoku(board):
+                            return True
+
+                        board[i][j] = '.'
+                return False
+
+    return True
+
+
 if __name__ == '__main__':
-    maze = [[1, 0, 0, 0], [1, 1, 0, 1], [1, 1, 0, 0], [0, 1, 1, 1]]
-    print(ratInMaze(maze))
+    board = [["5","3",".",".","7",".",".",".","."],["6",".",".","1","9","5",".",".","."],[".","9","8",".",".",".",".","6","."],["8",".",".",".","6",".",".",".","3"],["4",".",".","8",".","3",".",".","1"],["7",".",".",".","2",".",".",".","6"],[".","6",".",".",".",".","2","8","."],[".",".",".","4","1","9",".",".","5"],[".",".",".",".","8",".",".","7","9"]]
+    print(solveSudoku(board))
+    
+    for i in board:
+        print(i)
