@@ -10,5 +10,13 @@ def checkOdd(n: int) -> bool:
 def checkPower2(n: int) -> bool:
     return n & n - 1 == 0
 
+# Count the number of set bits
+def countSetBits(n: int) -> int:
+    cnt = 0
+    while n != 0:
+        cnt += 1
+        n = n & n - 1
+    return cnt
+
 if __name__ == '__main__':
-    print(checkPower2(8))
+    print(countSetBits(11))
