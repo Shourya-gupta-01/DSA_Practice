@@ -18,5 +18,16 @@ def countSetBits(n: int) -> int:
         n = n & n - 1
     return cnt
 
+# Swap two numbers
+def swap(a: int, b: int) -> int:
+    a = a ^ b
+    b = a ^ b
+    a = a ^ b
+    return a, b
+
+
 if __name__ == '__main__':
-    print(countSetBits(11))
+    a = 10
+    b = 20
+    a, b = swap(a, b)
+    print(a, b)
