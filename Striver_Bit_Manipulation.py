@@ -25,9 +25,15 @@ def swap(a: int, b: int) -> int:
     a = a ^ b
     return a, b
 
+# Minimum bit flips to convert number
+def minBitFlips(start: int, goal: int) -> int:
+    ans = start ^ goal
+    cnt = 0
+    while ans != 0:
+        cnt += 1
+        ans = ans & ans - 1
+    return cnt
 
 if __name__ == '__main__':
-    a = 10
-    b = 20
-    a, b = swap(a, b)
-    print(a, b)
+    print(minBitFlips(10, 7))
+
