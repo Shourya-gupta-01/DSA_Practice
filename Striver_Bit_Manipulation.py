@@ -1,4 +1,5 @@
 # Check the Ith bit
+from webbrowser import get
 def checkIthBit(n: int, i: int) -> bool:
     return n & (1 << i) != 0
 
@@ -119,7 +120,23 @@ def subsets(nums: list[int]) -> list[list[int]]:
         ans.append(temp)
     return ans
 
+# XOR of elements in a given range
+def findXOR(l: int, r: int) -> int:
+    def getXOR(n):
+        rem = n % 4
+        if rem == 1:
+            return 1
+        elif rem == 2:
+            return n + 1
+        elif rem == 3:
+            return 0
+        return n
+
+    xorL = getXOR(l - 1)
+    xorR = getXOR(r)
+
+    return xorR ^ xorL
 
 if __name__ == '__main__':
-    print(subsets([1, 2, 3]))
+    print(findXOR(4, 8))
 
