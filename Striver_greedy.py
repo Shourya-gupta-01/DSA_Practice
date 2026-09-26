@@ -38,5 +38,24 @@ def lemonadeChange(bills: list[int]) -> bool:
                 return False
     return True
 
+# Fractional Knapsack
+def fractionalKnapsack(val: list[int], wt: list[int], capacity: int) -> int:
+    items = []
+    profit = 0
+    for i in range(len(val)):
+        items.append([val[i] / wt[i], val[i], wt[i]])
+
+    items.sort(key = lambda x: x[0])
+
+    while items and capacity >= items[-1][2]:
+        profit += items[-1][1]
+        capacity -= items[-1][2]
+        items.pop()
+
+    if items and capacity > 0:
+        profit += (capacity / items[-1][2]) * items[-1][1]
+
+    return profit
+
 if __name__ == '__main__':
-    print(lemonadeChange([5,5,10,10,20]))
+    print(fractionalKnapsack([60, 100, 120], [10, 20, 30], 50))
