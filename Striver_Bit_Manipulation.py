@@ -59,6 +59,8 @@ def singleNumber2(nums: list[int]) -> int: #Bit solution Optimised
         ones = (ones ^ nums[i]) & ~twos
         twos = (twos ^ nums[i]) & ~ones
     return ones
+
+# Single Number-3
 def singleNumber3(nums: list[int]) -> list[int]:
     temp = 0
     for i in nums:
@@ -75,6 +77,36 @@ def singleNumber3(nums: list[int]) -> list[int]:
             b2 ^= i
     return [b1, b2]
 
+# Divide two number without multiplication and division
+def divide(dividend: int, divisor: int) -> int:
+    INT_MAX = 2 ** 31 - 1
+    INT_MIN = -2 ** 31
+    
+    if dividend == INT_MIN and divisor == -1:
+        return INT_MAX
+
+    is_neg = (divisor < 0) ^ (dividend < 0)
+    
+    a, b = abs(dividend), abs(divisor)
+    quotient = 0
+
+    while a >= b:
+        temp_divisor = b
+        multiple = 1
+
+        while a >= temp_divisor << 1:
+            temp_divisor <<= 1
+            multiple <<= 1
+
+        a -= temp_divisor
+        quotient += multiple
+
+    if is_neg:
+        quotient = -quotient
+
+    return max(INT_MIN, min(INT_MAX, quotient))
+
+
 if __name__ == '__main__':
-    print(singleNumber3([2, 2, 1, 3, 3, 5]))
+    print(divide(7, -2))
 
