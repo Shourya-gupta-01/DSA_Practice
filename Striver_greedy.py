@@ -14,5 +14,29 @@ def findContentChildren(g: list[int], s: list[int]) -> int:
     
     return cnt
 
+# Lemonade Change
+def lemonadeChange(bills: list[int]) -> bool:
+    galla5 = 0
+    galla10 = 0
+
+    for i in bills:
+        if i == 5:
+            galla5 += 1
+        elif i == galla10:
+            if galla5:
+                galla5 -= 1
+                galla10 += 1
+            else:
+                return False
+        elif i == 20:
+            if galla5 and galla10:
+                galla5 -= 1
+                galla10 -= 1
+            elif galla5 >= 3:
+                galla5 -= 3
+            else:
+                return False
+    return True
+
 if __name__ == '__main__':
-    print(findContentChildren([10, 9, 8, 7], [5, 6, 7, 8]))
+    print(lemonadeChange([5,5,10,10,20]))
