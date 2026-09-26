@@ -34,6 +34,13 @@ def minBitFlips(start: int, goal: int) -> int:
         ans = ans & ans - 1
     return cnt
 
+# Single Number-1
+def singleNumber1(nums: list[int]) -> int:
+    ans = 0
+    for i in nums:
+        ans ^= i
+    return ans
+
 if __name__ == '__main__':
-    print(minBitFlips(10, 7))
+    print(singleNumber1([2, 2, 10]))
 
