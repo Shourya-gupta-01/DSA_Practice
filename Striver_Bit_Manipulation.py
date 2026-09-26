@@ -23,7 +23,7 @@ def swap(a: int, b: int) -> int:
     a = a ^ b
     b = a ^ b
     a = a ^ b
-    return a, b
+    return (a, b)
 
 # Minimum bit flips to convert number
 def minBitFlips(start: int, goal: int) -> int:
@@ -81,12 +81,12 @@ def singleNumber3(nums: list[int]) -> list[int]:
 def divide(dividend: int, divisor: int) -> int:
     INT_MAX = 2 ** 31 - 1
     INT_MIN = -2 ** 31
-    
+
     if dividend == INT_MIN and divisor == -1:
         return INT_MAX
 
     is_neg = (divisor < 0) ^ (dividend < 0)
-    
+
     a, b = abs(dividend), abs(divisor)
     quotient = 0
 
@@ -106,7 +106,20 @@ def divide(dividend: int, divisor: int) -> int:
 
     return max(INT_MIN, min(INT_MAX, quotient))
 
+# Power Set Bit Manipulation
+def subsets(nums: list[int]) -> list[list[int]]:
+    ans = []
+    n_subset = 1 << len(nums)
+
+    for i in range(n_subset):
+        temp = []
+        for j in range(len(nums)):
+            if i & (1 << j):
+                temp.append(nums[j])
+        ans.append(temp)
+    return ans
+
 
 if __name__ == '__main__':
-    print(divide(7, -2))
+    print(subsets([1, 2, 3]))
 
