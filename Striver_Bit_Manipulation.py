@@ -41,6 +41,25 @@ def singleNumber1(nums: list[int]) -> int:
         ans ^= i
     return ans
 
+# Single Number-2
+# def singleNumber2(nums: list[int]) -> int: # Bit Solution Not Optimised
+#     ans = 0
+#     for bit_index in range(32):
+#         cnt = 0
+#         for i in range(len(nums)):
+#             if nums[i] & 1 << bit_index:
+#                 cnt += 1
+#         if cnt % 3 != 0:
+#             ans = ans | 1 << bit_index
+#     return ans
+
+def singleNumber2(nums: list[int]) -> int: #Bit solution Optimised
+    ones, twos = 0, 0
+    for i in range(len(nums)):
+        ones = (ones ^ nums[i]) & ~twos
+        twos = (twos ^ nums[i]) & ~ones
+    return ones
+
 if __name__ == '__main__':
-    print(singleNumber1([2, 2, 10]))
+    print(singleNumber2([2,2,2,5,5,5,3]))
 
