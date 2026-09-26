@@ -59,7 +59,22 @@ def singleNumber2(nums: list[int]) -> int: #Bit solution Optimised
         ones = (ones ^ nums[i]) & ~twos
         twos = (twos ^ nums[i]) & ~ones
     return ones
+def singleNumber3(nums: list[int]) -> list[int]:
+    temp = 0
+    for i in nums:
+        temp ^= i
+
+    rightMost = (temp & temp - 1) ^ temp
+
+    b1, b2 = 0, 0
+
+    for i in nums:
+        if i & rightMost:
+            b1 ^= i
+        else:
+            b2 ^= i
+    return [b1, b2]
 
 if __name__ == '__main__':
-    print(singleNumber2([2,2,2,5,5,5,3]))
+    print(singleNumber3([2, 2, 1, 3, 3, 5]))
 
