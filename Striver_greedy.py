@@ -77,5 +77,25 @@ def sjf(bt: list[int]) -> int:
 
     return sum(wt[:-1]) // len(bt)
 
+# Job Sequencing Problem (Not Optimized)
+def jobSequencing(deadline: list[int], profit: list[int]) -> list[int]:
+    jobs = sorted(zip(deadline, profit), key = lambda x: x[1], reverse = True)
+
+    max_deadline = max(deadline) if deadline else 0
+    slots = [-1] * (max_deadline + 1)
+
+    cnt_jobs = 0
+    max_profit = 0
+
+    for d, p in jobs:
+        for slot in range(d, 0, -1):
+            if slots[slot] == -1:
+                slots[slot] = 1
+                cnt_jobs += 1
+                max_profit += p
+                break
+
+    return [cnt_jobs, max_profit]
+
 if __name__ == '__main__':
-    print(sjf([4,3,7,1,2]))
+    print(jobSequencing([4, 1, 1, 1], [20, 10, 40, 30]))
