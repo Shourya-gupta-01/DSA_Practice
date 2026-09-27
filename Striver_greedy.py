@@ -67,5 +67,15 @@ def canJump(nums: list[int]) -> bool:
             return False
     return True
 
+# Shortest Job First
+def sjf(bt: list[int]) -> int:
+    bt.sort()
+    wt = [0]
+
+    for i in bt:
+        wt.append(wt[-1] + i)
+
+    return sum(wt[:-1]) // len(bt)
+
 if __name__ == '__main__':
-    print(canJump([3,2,1,0,4]))
+    print(sjf([4,3,7,1,2]))
