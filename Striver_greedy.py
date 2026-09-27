@@ -39,7 +39,7 @@ def lemonadeChange(bills: list[int]) -> bool:
     return True
 
 # Fractional Knapsack
-def fractionalKnapsack(val: list[int], wt: list[int], capacity: int) -> int:
+def fractionalKnapsack(val: list[int], wt: list[int], capacity: float) -> float:
     items = []
     profit = 0
     for i in range(len(val)):
@@ -57,5 +57,15 @@ def fractionalKnapsack(val: list[int], wt: list[int], capacity: int) -> int:
 
     return profit
 
+# Jump Game-1
+def canJump(nums: list[int]) -> bool:
+    maxIndex = 0
+    for i in range(len(nums)):
+        if i <= maxIndex:
+            maxIndex = max(maxIndex, nums[i] + i)
+        else:
+            return False
+    return True
+
 if __name__ == '__main__':
-    print(fractionalKnapsack([60, 100, 120], [10, 20, 30], 50))
+    print(canJump([3,2,1,0,4]))
