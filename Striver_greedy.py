@@ -114,5 +114,20 @@ def maxMeetings(start: list[int], end: list[int]) -> list[int]:
             endtime = i[1]
     return sorted(ans)
 
+# Non Overlapping Intervals
+def eraseOverlapIntervals(intervals: list[list[int]]) -> int:
+    intervals.sort(key = lambda x: x[1])
+
+    ans = 0
+    endtime = -float('inf')
+
+    for i in intervals:
+        if endtime <= i[0]:
+            endtime = i[1]
+        else:
+            ans += 1
+
+    return ans
+
 if __name__ == '__main__':
-    print(maxMeetings([1, 3, 0, 5, 8, 5], [2, 4, 6, 7, 9, 9]))
+    print(eraseOverlapIntervals([[1, 2], [1, 2], [1, 2]])) 
