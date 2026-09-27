@@ -97,5 +97,22 @@ def jobSequencing(deadline: list[int], profit: list[int]) -> list[int]:
 
     return [cnt_jobs, max_profit]
 
+
+# N meetings in a room
+def maxMeetings(start: list[int], end: list[int]) -> list[int]:
+    ans = []
+    meetings = []
+    for i in range(len(start)):
+        meetings.append((start[i], end[i], i))
+
+    meetings.sort(key = lambda x: (x[1], x[2]))
+    endtime = -1
+
+    for i in meetings:
+        if endtime < i[0]:
+            ans.append(i[2] + 1)
+            endtime = i[1]
+    return sorted(ans)
+
 if __name__ == '__main__':
-    print(jobSequencing([4, 1, 1, 1], [20, 10, 40, 30]))
+    print(maxMeetings([1, 3, 0, 5, 8, 5], [2, 4, 6, 7, 9, 9]))
