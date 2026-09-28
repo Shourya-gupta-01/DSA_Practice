@@ -142,5 +142,18 @@ def insertInterval(intervals: list[list[int]], newInterval: list[int]) -> list[l
             ans.append(i)
     return ans
 
+# Merge Intervals
+def mergeIntervals(intervals: list[list[int]]) -> list[list[int]]:
+    intervals.sort()
+    ans = [intervals[0]]
+
+    for i in intervals[1:]:
+        if ans[-1][-1] >= i[0]:
+            ans[-1][-1] = i[-1]
+        else:
+            ans.append(i)
+
+    return ans
+     
 if __name__ == '__main__':
-    print(insertInterval([[1,3],[6,9]], [2, 5])) 
+    print(mergeIntervals([[1, 3], [2, 6], [8, 10], [15, 18]]))
