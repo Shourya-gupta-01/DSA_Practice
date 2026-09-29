@@ -154,6 +154,27 @@ def mergeIntervals(intervals: list[list[int]]) -> list[list[int]]:
             ans.append(i)
 
     return ans
-     
+
+# Minimum Platforms Required
+def minPlatform(intervals: list[list[int]]) -> int:
+    arrival = sorted([i[0] for i in intervals])
+    departure = sorted([i[1] for i in intervals])
+
+    i = 0
+    j = 0
+    ans = 0
+    endres = 0
+
+    while i < len(arrival):
+        if arrival[i] <= departure[j]:
+            ans += 1
+            i += 1
+        else:
+            j += 1
+            ans -= 1
+        endres = max(endres, ans)
+
+    return endres
+
 if __name__ == '__main__':
-    print(mergeIntervals([[1, 3], [2, 6], [8, 10], [15, 18]]))
+    print(minPlatform([[5,10],[6,8],[1,5],[2,3],[1,10]]))
