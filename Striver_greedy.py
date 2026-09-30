@@ -176,5 +176,37 @@ def minPlatform(intervals: list[list[int]]) -> int:
 
     return endres
 
+# Candies ["Yaad krlo"]
+def minCandies(ratings: list[int]) -> int:
+    n = len(ratings)
+    if n <= 1:
+        return 1
+
+    candies = 1
+    i = 1
+
+    while i < n:
+        if ratings[i] == ratings[i - 1]:
+            candies += 1
+            i += 1
+            continue
+
+        peak = 1
+        while (i < n) and (ratings[i] > ratings[i - 1]):
+            peak += 1
+            candies += peak
+            i += 1
+
+        down = 0
+        while (i < n) and (ratings[i] < ratings[i - 1]):
+            down += 1
+            candies += down
+            i += 1
+
+        if (down >= peak):
+            candies += (down - peak + 1)
+
+    return candies
+
 if __name__ == '__main__':
-    print(minPlatform([[5,10],[6,8],[1,5],[2,3],[1,10]]))
+    print(minCandies([1, 2, 2]))
