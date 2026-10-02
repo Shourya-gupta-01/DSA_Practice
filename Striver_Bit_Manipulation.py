@@ -1,5 +1,4 @@
 # Check the Ith bit
-from webbrowser import get
 def checkIthBit(n: int, i: int) -> bool:
     return n & (1 << i) != 0
 

@@ -208,5 +208,20 @@ def minCandies(ratings: list[int]) -> int:
 
     return candies
 
+# jump Game-II
+def jump2(nums: list[int]) -> int:
+    farthest = 0
+    curr_end = 0
+    jumps = 0
+
+    for i in range(len(nums) - 1):
+        farthest = max(farthest, nums[i] + i)
+        
+        if curr_end == i:
+            jumps += 1
+            curr_end = farthest
+
+    return jumps
+
 if __name__ == '__main__':
-    print(minCandies([1, 2, 2]))
+    print(jump2([2,3,1,1,4]))
