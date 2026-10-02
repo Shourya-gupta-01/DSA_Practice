@@ -14,7 +14,25 @@ def maxScore(cardPoints: list[int], k: int) -> int:
         
     return ans
 
+# Longest Substring without repeating Character
+def lengthOfLongestSubstring(s: str) -> int:
+    d = {}
+    reslen = 0
+    l = 0
+    r = 0
+
+    while l < len(s) and r < len(s):
+        if d.get(s[r], 0) == 1:
+            d[s[l]] = 0
+            l += 1
+        else:
+            d[s[r]] = 1
+            reslen = max(reslen, (r - l + 1))
+            r += 1
+
+    return reslen
+
 if __name__ == '__main__':
-    print(maxScore([1,2,3,4,5,6,1], 3))
+    print(lengthOfLongestSubstring('eea'))
 
 
