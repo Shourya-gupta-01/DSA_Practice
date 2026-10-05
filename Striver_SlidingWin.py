@@ -32,7 +32,22 @@ def lengthOfLongestSubstring(s: str) -> int:
 
     return reslen
 
+# Max Consecutives ones III
+def longestOnes(nums: list[int], k: int) -> int:
+    l = 0
+    zeroes = 0
+
+    for r in range(len(nums)):
+        if nums[r] == 0:
+            zeroes += 1
+        if zeroes > k:
+            if nums[l] == 0:
+                zeroes -= 1
+            l += 1
+
+    return len(nums) - l
+
 if __name__ == '__main__':
-    print(lengthOfLongestSubstring('eea'))
+    print(longestOnes([1,1,1,0,0,0,1,1,1,1,0], 2))
 
 
