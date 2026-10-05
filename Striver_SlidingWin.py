@@ -47,7 +47,22 @@ def longestOnes(nums: list[int], k: int) -> int:
 
     return len(nums) - l
 
+# Fruit into Baskets
+def totalFruit(fruits: list[int]) -> int:
+    d = {}
+    l = 0
+
+    for r in range(len(fruits)):
+        d[fruits[r]] = d.get(fruits[r], 0) + 1
+        if len(d) > 2:
+            d[fruits[l]] -= 1
+            if d[fruits[l]] == 0:
+                del d[fruits[l]]
+            l += 1
+
+    return len(fruits) - l
+
 if __name__ == '__main__':
-    print(longestOnes([1,1,1,0,0,0,1,1,1,1,0], 2))
+    print(totalFruit([1, 2, 3, 2, 2]))
 
 
