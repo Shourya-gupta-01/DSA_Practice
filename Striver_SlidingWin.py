@@ -81,6 +81,22 @@ def longestKSubStr(s: str, k: int) -> int:
 
     return res
 
+# Longest Repeating Character Replacement
+def characterReplacement(s: str, k: int) -> int:
+    d = {}
+    maxFreq = 0
+    l = 0
+
+    for r in range(len(s)):
+        d[s[r]] = d.get(s[r], 0) + 1
+        maxFreq += max(maxFreq, d[s[r]])
+
+        if (r - l + 1) - maxFreq > k:
+            d[s[l]] -= 1
+            l += 1
+
+    return len(s) - l
+
 if __name__ == '__main__':
-    print(longestKSubStr('aaaa', 2))
+    print(characterReplacement('ABAB', 2))
 
