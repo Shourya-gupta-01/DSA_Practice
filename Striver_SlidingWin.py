@@ -130,5 +130,44 @@ def minWindow(s: str, t: str) -> str:
         return ""
     return s[sIndex: sIndex + int(minlen)]
 
+# Minimum Window Subsequence
+def minWindowII(s1: str, s2: str) -> str:
+    m, n = len(s1), len(s2)
+
+    min_len = float('inf')
+    start_idx = -1
+
+    s_idx = 0
+    while s_idx < m:
+        t_idx = 0
+
+        while s_idx < m:
+            if s1[s_idx] == s2[t_idx]:
+                t_idx += 1
+                if t_idx == n:
+                    break
+            s_idx += 1
+
+        if t_idx < n:
+            break
+
+        end = s_idx
+        t_idx = n - 1
+        while s_idx >= 0:
+            if s1[s_idx] == s2[t_idx]:
+                t_idx -= 1
+                if t_idx < 0:
+                    break
+            s_idx -= 1
+
+        window_len = end - s_idx + 1
+        if window_len < min_len:
+            min_len = window_len
+            start_idx = s_idx
+
+        s_idx = s_idx + 1
+
+    return '' if start_idx == -1 else s1[start_idx : start_idx + int(min_len)] 
+
 if __name__ == '__main__':
-    print(minWindow(s = "ADOBECODEBANC", t = "ABC"))
+    print(minWindowII(s1 = "abcdebdde", s2 = "bde"))
