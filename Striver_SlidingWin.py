@@ -97,6 +97,38 @@ def characterReplacement(s: str, k: int) -> int:
 
     return len(s) - l
 
-if __name__ == '__main__':
-    print(characterReplacement('ABAB', 2))
+# Minimum Window Substring
+def minWindow(s: str, t: str) -> str:
+    left = 0
+    d = {}
+    cnt = 0
+    minlen = float('inf')
+    sIndex = -1
 
+    for i in t:
+        d[i] = d.get(i, 0) + 1
+
+    for r in range(len(s)):
+        d[s[r]] = d.get(s[r], 0) - 1
+
+        if d[s[r]] >= 0:
+            cnt += 1
+
+        while cnt == len(t):
+            if r - left + 1 < minlen:
+                minlen = r - left + 1
+                sIndex = left
+
+            d[s[left]] += 1
+
+            if d[s[left]] > 0:
+                cnt -= 1
+
+            left += 1
+
+    if minlen == float('inf'):
+        return ""
+    return s[sIndex: sIndex + int(minlen)]
+
+if __name__ == '__main__':
+    print(minWindow(s = "ADOBECODEBANC", t = "ABC"))
