@@ -181,5 +181,34 @@ def numberOfSubstring(s: str) -> int:
 
     return cnt
 
+# Count Number of Nice Subarray
+def numberOfSubarrays(nums: list[int], k: int) -> int:
+    left = 0
+    cnt = 0
+    res = 0
+    prefix_evens = 0
+
+    for r in range(len(nums)):
+        if nums[r] & 1:
+            cnt += 1
+            prefix_evens = 0
+
+        while cnt > k:
+            if nums[left] & 1:
+                cnt -= 1
+            left += 1
+
+        if cnt == k:
+            while not (nums[left] & 1):
+                prefix_evens += 1
+                left += 1
+            cnt -= 1
+            left += 1
+            prefix_evens += 1
+
+        res += prefix_evens
+
+    return res
+
 if __name__ == '__main__':
-    print(numberOfSubstring('aaacb'))
+    print(numberOfSubarrays([2,2,2,1,2,2,1,2,2,2], 2))
