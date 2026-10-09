@@ -169,5 +169,17 @@ def minWindowII(s1: str, s2: str) -> str:
 
     return '' if start_idx == -1 else s1[start_idx : start_idx + int(min_len)] 
 
+# Number of substring containing all three Character
+def numberOfSubstring(s: str) -> int:
+    lstSeen = [-1] * 3
+    cnt = 0
+
+    for i in range(len(s)):
+        lstSeen[ord(s[i]) - ord('a')] = i
+
+        cnt += 1 + min(lstSeen[0], lstSeen[1], lstSeen[2])
+
+    return cnt
+
 if __name__ == '__main__':
-    print(minWindowII(s1 = "abcdebdde", s2 = "bde"))
+    print(numberOfSubstring('aaacb'))
