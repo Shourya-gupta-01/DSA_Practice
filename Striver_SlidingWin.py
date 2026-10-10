@@ -210,5 +210,28 @@ def numberOfSubarrays(nums: list[int], k: int) -> int:
 
     return res
 
+# Binary Subarrays with sum
+def numSubarraysWithSum(nums: list[int], goal: int) -> int:
+    def atmost(goal: int) -> int:
+        if goal < 0:
+            return 0
+
+        summ = 0
+        left = 0
+        cnt = 0
+
+        for r in range(len(nums)):
+            summ += nums[r]
+
+            while summ > goal:
+                if nums[left] == 1:
+                    summ -= 1
+                left += 1
+
+            cnt += r - left + 1
+
+        return cnt
+    return atmost(goal) - atmost(goal - 1)
+
 if __name__ == '__main__':
-    print(numberOfSubarrays([2,2,2,1,2,2,1,2,2,2], 2))
+    print(numSubarraysWithSum([1,0,1,0,1], goal = 2))
