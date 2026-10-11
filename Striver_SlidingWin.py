@@ -233,5 +233,30 @@ def numSubarraysWithSum(nums: list[int], goal: int) -> int:
         return cnt
     return atmost(goal) - atmost(goal - 1)
 
+# Subarray with K different Integers
+def subarrayWithKDistinct(nums: list[int], k: int) -> int:
+    def atmost(k):
+        if k < 0:
+            return 0
+
+        left = 0
+        d = {}
+        cnt = 0
+
+        for r in range(len(nums)):
+            d[nums[r]] = d.get(nums[r], 0) + 1
+
+            while len(d) > k:
+                d[nums[left]] -= 1
+                if d[nums[left]] == 0:
+                    del d[nums[left]]
+                left += 1
+
+            cnt += r - left + 1
+
+        return cnt
+
+    return atmost(k) - atmost(k - 1)
+
 if __name__ == '__main__':
-    print(numSubarraysWithSum([1,0,1,0,1], goal = 2))
+    print(subarrayWithKDistinct(nums = [1,2,1,2,3], k = 2))
