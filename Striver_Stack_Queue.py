@@ -25,5 +25,22 @@ def nextGreaterElement(nums1: list[int], nums2: list[int]) -> list[int]:
 
     return ans
 
+# Next Greater Element II
+def nextGreaterElementII(nums: list[int]) -> list[int]:
+    stk = []
+    n = len(nums)
+    ans = [-1] * n
+
+    for i in range(2 * (n - 1), -1, -1):
+        while stk and stk[-1] <= nums[i % n]:
+            stk.pop()
+
+        if i < n:
+            if stk:
+                ans[i] = stk[-1]
+
+        stk.append(nums[i % n])
+    return ans
+
 if __name__ == '__main__':
-    print(nextGreaterElement([4,1,2], [1,3,4,2]))
+    print(nextGreaterElementII([1,2,3,4,3]))
