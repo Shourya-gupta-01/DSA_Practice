@@ -42,5 +42,23 @@ def nextGreaterElementII(nums: list[int]) -> list[int]:
         stk.append(nums[i % n])
     return ans
 
+# Asteroid Collision
+def asteroidCollision(asteroids: list[int]) -> list[int]:
+    stk = []
+    for a in asteroids:
+        while stk and stk[-1] > 0 and a < 0:
+            diff = a + stk[-1]
+            if diff < 0:
+                stk.pop()
+            elif diff > 0:
+                a = 0
+            else:
+                a = 0
+                stk.pop()
+        if a:
+            stk.append(a)
+
+    return stk 
+
 if __name__ == '__main__':
-    print(nextGreaterElementII([1,2,3,4,3]))
+    print(asteroidCollision([3,5,-6,2,-1,4]))
