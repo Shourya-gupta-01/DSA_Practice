@@ -58,7 +58,48 @@ def asteroidCollision(asteroids: list[int]) -> list[int]:
         if a:
             stk.append(a)
 
-    return stk 
+    return stk
+
+# Sum of Subarray Minimums (Not Optimised) -> Can use DP to optimise
+def sumSubarrayMins(arr: list[int]) -> int:
+
+    def _nextSmallerIndex(arr: list[int]) -> list[int]:
+        ans = [-1] * len(arr)
+        stk = []
+
+        for i in range(len(arr) - 1, -1, -1):
+            while stk and arr[stk[-1]] >= arr[i]:
+                stk.pop()
+            ans[i] = len(arr) if not stk else stk[-1]
+            stk.append(i)
+
+        return ans
+
+    def _previousSmallerIndex(arr: list[int]) -> list[int]:
+        ans = [-1] * len(arr)
+        stk = []
+        
+        for i in range(len(arr)):
+            while stk and arr[stk[-1]] > arr[i]:
+                stk.pop()
+            if stk:
+                ans[i] = stk[-1]
+            stk.append(i)
+        
+        return ans
+
+    nsi = _nextSmallerIndex(arr)
+    psi = _previousSmallerIndex(arr)
+    mod = 1e9 + 7
+    total = 0
+
+    for i in range(len(arr)):
+        left = i - psi[i]
+        right = nsi[i] - i
+
+        total += ((right * left * arr[i]) % mod) % mod
+
+    return int(total)
 
 if __name__ == '__main__':
-    print(asteroidCollision([3,5,-6,2,-1,4]))
+    print(sumSubarrayMins([11,81,94,43,3]))
