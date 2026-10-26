@@ -243,5 +243,48 @@ def trap(height):
 
     return total
 
+# Largest Rectangle in Histogram
+def largestRectangleArea(heights: list[int]) -> list[int]:
+    max_area = 0
+    stk = []
+
+    for i, height in enumerate(heights):
+        while stk and height < heights[stk[-1]]:
+            top_index = stk.pop()
+            right_index = i
+
+            if stk:
+                left_index = stk[-1] + 1
+            else:
+                left_index = 0
+
+            current_area = (right_index - left_index) * heights[top_index]
+
+            max_area = max(current_area, max_area)
+
+
+        if stk and height == heights[stk[-1]]:
+            stk[-1] = i
+        else:
+            stk.append(i)
+
+    if stk:
+        right_index = stk[-1]
+
+        while stk:
+            top_index = stk.pop()
+
+            if stk:
+                left_index = stk[-1]
+            else:
+                left_index = -1
+
+            current_area = (right_index - left_index) * heights[top_index]
+            
+            max_area = max(current_area, max_area)
+
+    return max_area
+     
+
 if __name__ == '__main__':
-    print(trap([4,2,0,3,2,5]))
+    print(largestRectangleArea([2,4]))
