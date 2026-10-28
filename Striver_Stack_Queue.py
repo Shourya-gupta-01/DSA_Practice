@@ -244,7 +244,7 @@ def trap(height):
     return total
 
 # Largest Rectangle in Histogram
-def largestRectangleArea(heights: list[int]) -> list[int]:
+def largestRectangleArea(heights: list[int]) -> int:
     max_area = 0
     stk = []
 
@@ -285,6 +285,23 @@ def largestRectangleArea(heights: list[int]) -> list[int]:
 
     return max_area
      
+# Maximum Rectangle
+def maximalRectangle(matrix: list[list[str]]) -> int:
+    # Using largestRectangleArea
+    max_area = 0
+    heights = [0] * len(matrix[0])
+
+    for i in range(len(matrix)):
+        for j in range(len(matrix[0])):
+            if matrix[i][j] == '1':
+                heights[j] += 1
+            else:
+                heights[j] = 0
+
+        current_max_area = largestRectangleArea(heights)
+        max_area = max(max_area, current_max_area)
+
+    return max_area
 
 if __name__ == '__main__':
-    print(largestRectangleArea([2,4]))
+    print(maximalRectangle([["1","0","1","0","0"],["1","0","1","1","1"],["1","1","1","1","1"],["1","0","0","1","0"]]))
